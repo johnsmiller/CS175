@@ -1,5 +1,6 @@
 package com.techknowgeek.dizzyphone;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -24,6 +25,9 @@ public class GameActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        ActionBar actionBar = getActionBar();
+        actionBar.hide();
+
         // Check whether we're recreating a previously destroyed instance
         if (savedInstanceState != null) {
             // Restore value of members from saved state
@@ -33,7 +37,7 @@ public class GameActivity extends Activity {
             playerScore = savedInstanceState.getInt(STATE_SCORE);
 
         } else {
-            // Probably initialize members with default values for a new instance
+            // Probably should initialize members with default values for a new instance
             time = 1.0;
             playerName = "Player 1";
             highScore = 0;

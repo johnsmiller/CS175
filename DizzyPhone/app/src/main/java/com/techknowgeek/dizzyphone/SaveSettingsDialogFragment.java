@@ -1,11 +1,9 @@
 package com.techknowgeek.dizzyphone;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 
 /**
@@ -31,7 +29,7 @@ public class SaveSettingsDialogFragment extends DialogFragment{
                         caller.sendMainMenuActivity();
                     }
                 })
-                .setNegativeButton(R.string.dialog_cancel, new DialogInterface.OnClickListener() {
+                .setNegativeButton(R.string.dialog_dont_save, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         // User cancelled the dialog
                         caller.sendMainMenuActivity();

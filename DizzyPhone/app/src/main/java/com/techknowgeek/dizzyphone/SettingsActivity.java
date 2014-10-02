@@ -1,6 +1,7 @@
 package com.techknowgeek.dizzyphone;
 
 import android.annotation.TargetApi;
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.DialogFragment;
 import android.app.Fragment;
@@ -23,23 +24,15 @@ public class SettingsActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        ActionBar actionBar = getActionBar();
+        actionBar.hide();
+
         setContentView(R.layout.activity_settings);
-        setupActionBar();
 
         final View contentView = findViewById(R.id.fullscreen_content);
 
     }
 
-    /**
-     * Set up the {@link android.app.ActionBar}, if the API is available.
-     */
-    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
-    private void setupActionBar() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-            // Show the Up button in the action bar.
-            getActionBar().setDisplayHomeAsUpEnabled(true);
-        }
-    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -80,7 +73,9 @@ public class SettingsActivity extends Activity {
 
     public void sendMainMenuActivity()
     {
-        Intent intent = new Intent(this, menuscreenActivity.class);
-        startActivity(intent);
+        //Main Menu initiated this activity, therefore it only needs to close to return to the menu
+        //Intent intent = new Intent(this, menuscreenActivity.class);
+        //startActivity(intent);
+        this.finish();
     }
 }
