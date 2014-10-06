@@ -26,6 +26,12 @@ public class menuscreenActivity extends Activity {
 
     }
 
+    public void sendGameActivity(View view)
+    {
+        Intent intent = new Intent(this, GameActivity.class);
+        startActivity(intent);
+    }
+
     public void sendSettingsActivity(View view)
     {
         Intent intent = new Intent(this, SettingsActivity.class);

@@ -14,5 +14,6 @@
     <string name="dialog_save">Save</string>
     <string name="dialog_dont_save">Don\'t Save</string>
     <string name="title_activity_game">GameActivity</string>
+    <string name="main_menu">Main Menu</string>
 
 </resources>
