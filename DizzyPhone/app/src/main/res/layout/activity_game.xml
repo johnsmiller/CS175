@@ -14,28 +14,89 @@
         android:textStyle="bold"
         android:textSize="50sp"
         android:gravity="center"
-        android:text="@string/dizzy_phone"/>
+        android:text="@string/dizzy_phone"
+        android:layout_alignParentEnd="false"
+        android:layout_alignParentStart="false" />
 
-
-    <Button android:id="@+id/start_button"
-        style="?metaButtonBarButtonStyle"
-        android:layout_width="fill_parent"
+    <TextView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="@string/start_button"
-        android:layout_centerInParent="true"
-        android:layout_gravity="bottom"
-        />
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Score:"
+        android:id="@+id/scoreLabel"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
-    <Button android:id="@+id/settings_button"
-        style="?metaButtonBarButtonStyle"
-        android:layout_width="fill_parent"
+    <TextView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_below="@+id/start_button"
-        android:layout_weight="1"
-        android:text="@string/settings_text"
-        android:onClick="showSaveDialog"
-        />
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Lives:"
+        android:id="@+id/livesLabel"
+        android:layout_below="@+id/scoreLabel"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="40"
+        android:id="@+id/currentScore"
+        android:layout_toEndOf="@+id/scoreLabel"
+        android:layout_above="@+id/livesLabel"
+        android:layout_toRightOf="@+id/scoreLabel" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="3"
+        android:id="@+id/currentLives"
+        android:layout_alignBottom="@+id/livesLabel"
+        android:layout_toRightOf="@+id/livesLabel"
+        android:layout_toEndOf="@+id/livesLabel" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="High:"
+        android:id="@+id/highScoreLabel"
+        android:layout_toEndOf="@+id/currentOrientation"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/currentOrientation" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Landscape"
+        android:id="@+id/currentOrientation"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="I'm There"
+        android:id="@+id/imThereButton"
+        android:layout_toStartOf="@+id/currentHighScore"
+        android:layout_marginTop="74dp"
+        android:layout_toEndOf="@+id/currentScore"
+        android:layout_below="@+id/currentOrientation"
+        android:layout_toLeftOf="@+id/currentHighScore" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="50"
+        android:id="@+id/currentHighScore"
+        android:layout_toEndOf="@+id/highScoreLabel"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
 
 </RelativeLayout>
