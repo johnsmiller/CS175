@@ -6,6 +6,9 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 
 public class GameActivity extends Activity {
 
@@ -20,6 +23,8 @@ public class GameActivity extends Activity {
     private static int highScore;
     private static int playerScore;
     private static int lives;
+
+    private Timer zehTimer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,9 +47,10 @@ public class GameActivity extends Activity {
             playerName = "Player 1";
             highScore = 0;
             playerScore = 0;
-            lives = 0;
+            lives = 3; // Start with three lives
         }
 
+        //zehTimer = new TimerTask();
         setContentView(R.layout.activity_game);
     }
 
@@ -80,6 +86,22 @@ public class GameActivity extends Activity {
         // Always call the superclass so it can save the view hierarchy state
         super.onSaveInstanceState(savedInstanceState);
     }
+
+    public void onButtonClick(){
+        // Kill timer
+        // Score++;
+    }
+
+    public boolean timeIsUp(){
+        // Flash background color
+        // IF out of lives
+        //    GAME OVER and display score before going back to main menu
+        //    Add score to highscore table
+        // ELSE
+        //    Lives--;
+        return true;
+    }
+
 
     public static void setStateTime(double timeState)
     {
