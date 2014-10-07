@@ -63,9 +63,8 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="High:"
         android:id="@+id/highScoreLabel"
-        android:layout_toEndOf="@+id/currentOrientation"
         android:layout_alignParentTop="true"
-        android:layout_toRightOf="@+id/currentOrientation" />
+        android:layout_toStartOf="@+id/currentHighScore" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -81,11 +80,10 @@
         android:layout_height="wrap_content"
         android:text="I'm There"
         android:id="@+id/imThereButton"
-        android:layout_toStartOf="@+id/currentHighScore"
-        android:layout_marginTop="74dp"
-        android:layout_toEndOf="@+id/currentScore"
         android:layout_below="@+id/currentOrientation"
-        android:layout_toLeftOf="@+id/currentHighScore" />
+        android:layout_toRightOf="@+id/currentScore"
+        android:layout_marginTop="43dp"
+        android:layout_alignStart="@id/currentOrientation" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -93,7 +91,6 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="50"
         android:id="@+id/currentHighScore"
-        android:layout_toEndOf="@+id/highScoreLabel"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
