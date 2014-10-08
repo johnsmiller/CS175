@@ -17,7 +17,7 @@ public class GameActivity extends Activity {
     private static TextView playerScoreView;
     private static TextView livesView;
 
-    private double time;
+    private long time;
     private String playerName;
     private int highScore;
     private int playerScore;
@@ -36,8 +36,19 @@ public class GameActivity extends Activity {
         highScoreView = (TextView)findViewById(R.id.currentHighScore);
         playerScoreView = (TextView)findViewById(R.id.currentScore);
         livesView = (TextView)findViewById(R.id.currentLives);
+        // Assign Vars and Get Highscore
+        highScore = menuscreenActivity.getHighScore();
+        time = menuscreenActivity.getTime();
 
-        //zehTimer = new TimerTask();
+        TimerTask aTask = new TimerTask() {
+            @Override
+            public void run(){
+                upDateTextViews();
+                timeIsUp();
+            }
+        };
+        zehTimer = new Timer();
+        zehTimer.scheduleAtFixedRate(aTask, time, time);
         setContentView(R.layout.activity_game);
     }
 
@@ -63,24 +74,25 @@ public class GameActivity extends Activity {
 
     public void onButtonClick(){
         // Kill timer
-        // Score++;
-        // Update Scores
+        playerScore++;
+        // Update Scores Views
     }
 
-    public boolean timeIsUp(){
-        // Flash background color
-        // IF out of lives
-        //    GAME OVER and display score before going back to main menu
-        //    Add score to highscore table
-        // ELSE
-        //    Lives--;
-        // Update Scores
-        return true;
+    private void timeIsUp(){
+        // Flash background color to notify user.
+        // Its not required but might make the app easier
+
+        if(lives <= 0) {
+            // IF playerScore > highScore THEN update highScore to playerScore in menuscreen
+            // GAME OVER and display score before going back to main menu
+            this.finish();
+        } else {
+            lives--;
+            // Update Scores Views
+        }
     }
 
-    public void updateScores(){
-
+    public void upDateTextViews(){
+        //Updated textviews in here
     }
-
-
 }
