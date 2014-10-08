@@ -76,6 +76,7 @@ public class GameActivity extends Activity {
         // Kill timer
         playerScore++;
         // Update Scores Views
+        playerScoreView.setText(String.valueOf(playerScore));
     }
 
     private void timeIsUp(){
@@ -93,6 +94,25 @@ public class GameActivity extends Activity {
     }
 
     public void upDateTextViews(){
+        highScoreView.setText(String.valueOf(highScore));
+        playerScoreView.setText(String.valueOf(playerScore));
+        livesView.setText(String.valueOf(lives));
         //Updated textviews in here
     }
+
+    /* public int getScreenOrientation()
+{
+    Display getOrient = getWindowManager().getDefaultDisplay();
+    int orientation = Configuration.ORIENTATION_UNDEFINED;
+    if(getOrient.getWidth()==getOrient.getHeight()){
+        orientation = Configuration.ORIENTATION_SQUARE;
+    } else{
+        if(getOrient.getWidth() < getOrient.getHeight()){
+            orientation = Configuration.ORIENTATION_PORTRAIT;
+        }else {
+             orientation = Configuration.ORIENTATION_LANDSCAPE;
+        }
+    }
+    return orientation;
+} */
 }
