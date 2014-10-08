@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    android:background="#0099cc"
+    android:background="#000"
     tools:context="com.techknowgeek.dizzyphone.SettingsActivity"
     >
 
@@ -14,29 +14,67 @@
         android:textColor="#33b5e5"
         android:textStyle="bold"
         android:textSize="50sp"
-        android:gravity="center"
+        android:gravity="center_horizontal"
         android:text="@string/action_settings" />
 
-
-    <Button android:id="@+id/start_button"
-        style="?metaButtonBarButtonStyle"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="@string/start_button"
-        android:layout_centerInParent="true"
-        android:layout_gravity="bottom"
-        />
 
     <Button android:id="@+id/settings_button"
         style="?metaButtonBarButtonStyle"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_below="@+id/start_button"
-        android:layout_weight="1"
-        android:text="@string/settings_text"
+        android:layout_alignParentBottom="true"
+        android:text="@string/back_button"
         android:onClick="showSaveDialog"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/player_name"
+        android:id="@id/player_name_text_display"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="95dp" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:text="@string/player1"
+        android:ems="10"
+        android:id="@+id/editText"
+        android:layout_below="@+id/player_name_text_display"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="39dp" />
+
+    <SeekBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/seekBar"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@id/game_speed"
+        android:layout_alignParentRight="true"
+        android:max="19"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:id="@id/seekbar_value"
+        android:layout_below="@+id/seekBar"
+        android:layout_alignLeft="@+id/seekBar"
+        android:layout_alignStart="@+id/seekBar" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/game_speed"
+        android:id="@+id/game_speed"
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
         />
 
 </RelativeLayout>

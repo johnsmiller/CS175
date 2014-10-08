@@ -25,7 +25,7 @@ public class SaveSettingsDialogFragment extends DialogFragment{
         builder.setMessage(R.string.dialog_save_settings)
                 .setPositiveButton(R.string.dialog_save, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        // FIRE ZE MISSILES!
+                        caller.saveSettings();
                         caller.sendMainMenuActivity();
                     }
                 })

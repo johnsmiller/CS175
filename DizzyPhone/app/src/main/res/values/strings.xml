@@ -15,5 +15,9 @@
     <string name="dialog_dont_save">Don\'t Save</string>
     <string name="title_activity_game">GameActivity</string>
     <string name="main_menu">Main Menu</string>
+    <string name="back_button">Back</string>
+    <string name="player1">Player1</string>
+    <string name="player_name">Player Name</string>
+    <string name="game_speed">Game Speed</string>
 
 </resources>
