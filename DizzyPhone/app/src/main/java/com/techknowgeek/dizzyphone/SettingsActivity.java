@@ -38,11 +38,11 @@ public class SettingsActivity extends Activity implements SeekBar.OnSeekBarChang
 
         mSeekBar = (SeekBar) findViewById(R.id.seekBar);
         mSeekBar.setOnSeekBarChangeListener(this);
-        mSeekBar.setProgress(Math.round(Math.round((GameActivity.getTime()-.1)*10)));
-        setSliderView(mSeekBar.getProgress());
+        mSeekBar.setProgress(Math.round(Math.round((menuscreenActivity.getTime()-100)/1000)));
+        setSliderView();
 
-        if(GameActivity.getPlayerName() != null)
-            mPlayerName.setText(GameActivity.getPlayerName());
+        if(menuscreenActivity.getPlayerName() != null)
+            mPlayerName.setText(menuscreenActivity.getPlayerName());
 
 
 
@@ -92,9 +92,9 @@ public class SettingsActivity extends Activity implements SeekBar.OnSeekBarChang
     {
         //Save Name
         EditText textView = (EditText)findViewById(R.id.editText);
-        GameActivity.setStatePlayerName(textView.getText().toString());
+        menuscreenActivity.setPlayerName(textView.getText().toString());
         //Save Time Delay
-        GameActivity.setStateTime(mSeekBar.getProgress());
+        menuscreenActivity.setTime(setSliderView());
     }
 
     public void sendMainMenuActivity()
@@ -116,13 +116,15 @@ public class SettingsActivity extends Activity implements SeekBar.OnSeekBarChang
      */
     @Override
     public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-        setSliderView(progress);
+        setSliderView();
     }
 
-    private void setSliderView(int progress)
+    private long setSliderView()
     {
+        int progress = mSeekBar.getProgress();
         TextView textView = (TextView)findViewById(R.id.seekbar_value);
         textView.setText(((progress/10.0 + .1)+"").substring(0, 3) + " Seconds Delay");
+        return ((progress + 1)*100);
     }
 
     /**
