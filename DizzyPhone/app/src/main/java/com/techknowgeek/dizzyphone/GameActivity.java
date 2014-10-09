@@ -44,6 +44,8 @@ public class GameActivity extends Activity {
         playerScore = 0;
         lives = 3;
 
+        upDateTextViews();
+
         setTimerTask();
     }
 
