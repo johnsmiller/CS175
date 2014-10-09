@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.view.Display;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 
 import java.util.Timer;
@@ -100,7 +101,7 @@ public class GameActivity extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void onButtonClick(){
+    public void onButtonClick(View view){
         if(isCorrectOrientation()) {
             zehTimer.cancel();
             playerScore++;
@@ -144,6 +145,8 @@ public class GameActivity extends Activity {
         if(lives <= 0) {
             // IF playerScore > highScore THEN update highScore to playerScore in menuscreen
             // GAME OVER and display score before going back to main menu
+            if(playerScore > menuscreenActivity.getHighScore())
+                menuscreenActivity.setHighScore(playerScore);
             this.finish();
         } else {
             lives--;
