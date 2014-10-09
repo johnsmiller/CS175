@@ -28,7 +28,7 @@ public class GameActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_game);
+        setContentView(R.layout.activity_game); //Must be called BEFORE getting ViewByID
 
         ActionBar actionBar = getActionBar();
         actionBar.hide();
@@ -37,8 +37,7 @@ public class GameActivity extends Activity {
         highScoreView = (TextView)findViewById(R.id.currentHighScore);
         playerScoreView = (TextView)findViewById(R.id.currentScore);
         livesView = (TextView)findViewById(R.id.currentLives);
-        System.out.println("Values Assigned");
-        nullCheck();
+
         // Assign Vars and Get Highscore
         highScore = menuscreenActivity.getHighScore();
         time = menuscreenActivity.getTime();
@@ -109,31 +108,10 @@ public class GameActivity extends Activity {
     }
 
     public static void upDateTextViews(){
-        try {
-            highScoreView.setText(String.valueOf(highScore));
-            playerScoreView.setText(String.valueOf(playerScore));
-            livesView.setText(String.valueOf(lives));
-            //Updated textviews in here
-        } catch (NullPointerException ex) {
-            System.out.println("\n\n\n\n\n\nNULL EXCEPTION!!!!!!!!!!\n\n\n\n\n\n\n");
-            nullCheck();
-        }
-    }
-
-    private static void nullCheck()
-    {
-        if(highScoreView == null)
-        {
-            System.out.println("highScoreView is null");
-        }
-        if(playerScoreView == null)
-        {
-            System.out.println("playerScoreView is null");
-        }
-        if(livesView == null)
-        {
-            System.out.println("livesView is null");
-        }
+        highScoreView.setText(String.valueOf(highScore));
+        playerScoreView.setText(String.valueOf(playerScore));
+        livesView.setText(String.valueOf(lives));
+        //Updated textviews in here
     }
 
     /* public int getScreenOrientation()
