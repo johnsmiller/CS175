@@ -16,6 +16,8 @@
         android:gravity="center"
         android:text="@string/dizzy_phone"
         android:layout_alignParentEnd="false"
+        android:layout_alignParentRight="false"
+        android:layout_alignParentLeft="false"
         android:layout_alignParentStart="false" />
 
     <TextView
@@ -64,6 +66,7 @@
         android:text="High:"
         android:id="@+id/highScoreLabel"
         android:layout_alignParentTop="true"
+        android:layout_toLeftOf="@+id/currentHighScore"
         android:layout_toStartOf="@+id/currentHighScore" />
 
     <TextView
@@ -83,6 +86,7 @@
         android:layout_below="@+id/currentOrientation"
         android:layout_toRightOf="@+id/currentScore"
         android:layout_marginTop="43dp"
+        android:layout_alignLeft="@id/currentOrientation"
         android:layout_alignStart="@id/currentOrientation" />
 
     <TextView
