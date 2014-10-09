@@ -19,15 +19,16 @@ public class GameActivity extends Activity {
 
     private long time;
     private String playerName;
-    private int highScore;
-    private int playerScore;
-    private int lives;
+    private static int highScore;
+    private static int playerScore;
+    private static int lives;
 
     private Timer zehTimer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_game);
 
         ActionBar actionBar = getActionBar();
         actionBar.hide();
@@ -36,20 +37,33 @@ public class GameActivity extends Activity {
         highScoreView = (TextView)findViewById(R.id.currentHighScore);
         playerScoreView = (TextView)findViewById(R.id.currentScore);
         livesView = (TextView)findViewById(R.id.currentLives);
+        System.out.println("Values Assigned");
+        nullCheck();
         // Assign Vars and Get Highscore
         highScore = menuscreenActivity.getHighScore();
         time = menuscreenActivity.getTime();
+        playerScore = 0;
+        lives = 3;
 
+        setTimerTask();
+    }
+
+    private void setTimerTask()
+    {
         TimerTask aTask = new TimerTask() {
             @Override
-            public void run(){
-                upDateTextViews();
-                timeIsUp();
+            public void run() {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        upDateTextViews();
+                        timeIsUp();
+                    }
+                });
             }
         };
         zehTimer = new Timer();
-        zehTimer.scheduleAtFixedRate(aTask, time, time);
-        setContentView(R.layout.activity_game);
+        zehTimer.schedule(aTask, time);
     }
 
 
@@ -89,15 +103,37 @@ public class GameActivity extends Activity {
             this.finish();
         } else {
             lives--;
+            setTimerTask();
             // Update Scores Views
         }
     }
 
-    public void upDateTextViews(){
-        highScoreView.setText(String.valueOf(highScore));
-        playerScoreView.setText(String.valueOf(playerScore));
-        livesView.setText(String.valueOf(lives));
-        //Updated textviews in here
+    public static void upDateTextViews(){
+        try {
+            highScoreView.setText(String.valueOf(highScore));
+            playerScoreView.setText(String.valueOf(playerScore));
+            livesView.setText(String.valueOf(lives));
+            //Updated textviews in here
+        } catch (NullPointerException ex) {
+            System.out.println("\n\n\n\n\n\nNULL EXCEPTION!!!!!!!!!!\n\n\n\n\n\n\n");
+            nullCheck();
+        }
+    }
+
+    private static void nullCheck()
+    {
+        if(highScoreView == null)
+        {
+            System.out.println("highScoreView is null");
+        }
+        if(playerScoreView == null)
+        {
+            System.out.println("playerScoreView is null");
+        }
+        if(livesView == null)
+        {
+            System.out.println("livesView is null");
+        }
     }
 
     /* public int getScreenOrientation()

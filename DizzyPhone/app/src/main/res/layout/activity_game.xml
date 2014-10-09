@@ -25,7 +25,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Score:"
-        android:id="@+id/scoreLabel"
+        android:id="@id/scoreLabel"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
@@ -34,8 +34,8 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Lives:"
-        android:id="@+id/livesLabel"
-        android:layout_below="@+id/scoreLabel"
+        android:id="@id/livesLabel"
+        android:layout_below="@id/scoreLabel"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
@@ -44,37 +44,37 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="40"
-        android:id="@+id/currentScore"
-        android:layout_toEndOf="@+id/scoreLabel"
-        android:layout_above="@+id/livesLabel"
-        android:layout_toRightOf="@+id/scoreLabel" />
+        android:id="@id/currentScore"
+        android:layout_toEndOf="@id/scoreLabel"
+        android:layout_above="@id/livesLabel"
+        android:layout_toRightOf="@id/scoreLabel" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="3"
-        android:id="@+id/currentLives"
-        android:layout_alignBottom="@+id/livesLabel"
-        android:layout_toRightOf="@+id/livesLabel"
-        android:layout_toEndOf="@+id/livesLabel" />
+        android:id="@id/currentLives"
+        android:layout_alignBottom="@id/livesLabel"
+        android:layout_toRightOf="@id/livesLabel"
+        android:layout_toEndOf="@id/livesLabel" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="High:"
-        android:id="@+id/highScoreLabel"
+        android:id="@id/highScoreLabel"
         android:layout_alignParentTop="true"
-        android:layout_toLeftOf="@+id/currentHighScore"
-        android:layout_toStartOf="@+id/currentHighScore" />
+        android:layout_toLeftOf="@id/currentHighScore"
+        android:layout_toStartOf="@id/currentHighScore" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Landscape"
-        android:id="@+id/currentOrientation"
+        android:id="@id/currentOrientation"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true" />
 
@@ -83,8 +83,8 @@
         android:layout_height="wrap_content"
         android:text="I'm There"
         android:id="@+id/imThereButton"
-        android:layout_below="@+id/currentOrientation"
-        android:layout_toRightOf="@+id/currentScore"
+        android:layout_below="@id/currentOrientation"
+        android:layout_toRightOf="@id/currentScore"
         android:layout_marginTop="43dp"
         android:layout_alignLeft="@id/currentOrientation"
         android:layout_alignStart="@id/currentOrientation" />
@@ -94,7 +94,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="50"
-        android:id="@+id/currentHighScore"
+        android:id="@id/currentHighScore"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
