@@ -38,7 +38,7 @@ public class SettingsActivity extends Activity implements SeekBar.OnSeekBarChang
 
         mSeekBar = (SeekBar) findViewById(R.id.seekBar);
         mSeekBar.setOnSeekBarChangeListener(this);
-        mSeekBar.setProgress(Math.round(Math.round((menuscreenActivity.getTime()-100)/1000)));
+        mSeekBar.setProgress(Math.round(Math.round((menuscreenActivity.getTime()-100)/100)));
         setSliderView();
 
         if(menuscreenActivity.getPlayerName() != null)
@@ -124,7 +124,7 @@ public class SettingsActivity extends Activity implements SeekBar.OnSeekBarChang
         int progress = mSeekBar.getProgress();
         TextView textView = (TextView)findViewById(R.id.seekbar_value);
         textView.setText(((progress/10.0 + .1)+"").substring(0, 3) + " Seconds Delay");
-        return ((progress + 1)*100);
+        return ((progress + 1)*1000);
     }
 
     /**

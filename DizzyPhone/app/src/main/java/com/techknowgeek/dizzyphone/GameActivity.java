@@ -37,7 +37,7 @@ public class GameActivity extends Activity {
     private Timer zehTimer;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) { //WILL BE CALLED ON ORIENTATION CHANGE
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game); //Must be called BEFORE getting ViewByID
 
@@ -147,6 +147,8 @@ public class GameActivity extends Activity {
             // GAME OVER and display score before going back to main menu
             if(playerScore > menuscreenActivity.getHighScore())
                 menuscreenActivity.setHighScore(playerScore);
+            lives = 3;
+            playerScore = 0;
             this.finish();
         } else {
             lives--;
