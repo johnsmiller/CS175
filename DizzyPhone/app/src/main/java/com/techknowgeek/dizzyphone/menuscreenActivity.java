@@ -3,6 +3,7 @@ package com.techknowgeek.dizzyphone;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 
@@ -12,6 +13,8 @@ import android.view.View;
  *
  */
 public class menuscreenActivity extends Activity {
+
+    public static final String PREFS_NAME ="DizzyPhonePreferences";
 
     static final String STATE_TIME = "time";
     static final String STATE_PLAYER_NAME = "playerName";
@@ -28,19 +31,11 @@ public class menuscreenActivity extends Activity {
         ActionBar actionBar = getActionBar();
         actionBar.hide();
 
-        // Check whether we're recreating a previously destroyed instance
-        if (savedInstanceState != null) {
-            // Restore value of members from saved state
-            time = savedInstanceState.getInt(STATE_TIME);
-            playerName = savedInstanceState.getString(STATE_PLAYER_NAME);
-            highScore = savedInstanceState.getInt(STATE_HIGH_SCORE);
-
-        } else {
-            // Probably should initialize members with default values for a new instance
-            time = 1000; //
-            playerName = "Player 1";
-            highScore = 0;
-        }
+        // Restore/create instances
+        SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+        time = settings.getLong(STATE_TIME, 1000);
+        playerName = settings.getString(STATE_PLAYER_NAME, "Player 1");
+        highScore = settings.getInt(STATE_HIGH_SCORE, 0);
 
         setContentView(R.layout.activity_menuscreen);
 
@@ -49,14 +44,20 @@ public class menuscreenActivity extends Activity {
     }
 
     @Override
-    public void onSaveInstanceState(Bundle savedInstanceState) {
-        // Save the user's current game state
-        savedInstanceState.putLong(STATE_TIME, time);
-        savedInstanceState.putString(STATE_PLAYER_NAME, playerName);
-        savedInstanceState.putInt(STATE_HIGH_SCORE, highScore);
+    protected void onStop(){
+        super.onStop();
 
-        // Always call the superclass so it can save the view hierarchy state
-        super.onSaveInstanceState(savedInstanceState);
+        // We need an Editor object to make preference changes.
+        // All objects are from android.context.Context
+        SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+        SharedPreferences.Editor editor = settings.edit();
+
+        editor.putLong(STATE_TIME, time);
+        editor.putString(STATE_PLAYER_NAME, playerName);
+        editor.putInt(STATE_HIGH_SCORE, highScore);
+
+        // Commit the edits!
+        editor.commit();
     }
 
     public static long getTime() {

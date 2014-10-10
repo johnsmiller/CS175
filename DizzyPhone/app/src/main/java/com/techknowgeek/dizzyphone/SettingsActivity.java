@@ -26,6 +26,10 @@ public class SettingsActivity extends Activity implements SeekBar.OnSeekBarChang
     private SeekBar mSeekBar;
     private EditText mPlayerName;
 
+    public final int minimumSliderValue = 1;
+    public final int maxSliderValue = 20;
+    public final int sliderValueDivisor = 10;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,6 +41,7 @@ public class SettingsActivity extends Activity implements SeekBar.OnSeekBarChang
         mPlayerName = (EditText) findViewById(R.id.editText);
 
         mSeekBar = (SeekBar) findViewById(R.id.seekBar);
+        mSeekBar.setMax(maxSliderValue-minimumSliderValue);
         mSeekBar.setOnSeekBarChangeListener(this);
         mSeekBar.setProgress(Math.round(Math.round((menuscreenActivity.getTime()-100)/100)));
         setSliderView();
@@ -123,8 +128,8 @@ public class SettingsActivity extends Activity implements SeekBar.OnSeekBarChang
     {
         int progress = mSeekBar.getProgress();
         TextView textView = (TextView)findViewById(R.id.seekbar_value);
-        textView.setText(((progress/10.0 + .1)+"").substring(0, 3) + " Seconds Delay");
-        return ((progress + 1)*1000);
+        textView.setText((((progress+minimumSliderValue)/(double)sliderValueDivisor)+"").substring(0, 3) + " Seconds Delay");
+        return ((progress + minimumSliderValue)*(1000/sliderValueDivisor));
     }
 
     /**
