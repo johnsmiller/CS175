@@ -33,6 +33,14 @@
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_game" >
         </activity>
+        <activity
+            android:name=".gameover"
+            android:label="@string/title_activity_gameover"
+            android:parentActivityName=".menuscreenActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.techknowgeek.dizzyphone.menuscreenActivity" />
+        </activity>
     </application>
 
 </manifest>

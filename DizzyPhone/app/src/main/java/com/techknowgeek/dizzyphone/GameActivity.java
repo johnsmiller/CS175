@@ -3,6 +3,7 @@ package com.techknowgeek.dizzyphone;
 import android.annotation.TargetApi;
 import android.app.ActionBar;
 import android.app.Activity;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.Point;
@@ -147,8 +148,8 @@ public class GameActivity extends Activity {
             // GAME OVER and display score before going back to main menu
             if(playerScore > menuscreenActivity.getHighScore())
                 menuscreenActivity.setHighScore(playerScore);
-            lives = 3;
-            playerScore = 0;
+            Intent intent = new Intent(this, gameover.class);
+            startActivity(intent);
             this.finish();
         } else {
             lives--;
@@ -166,19 +167,9 @@ public class GameActivity extends Activity {
         //Updated textviews in here
     }
 
-    /* public int getScreenOrientation()
-{
-    Display getOrient = getWindowManager().getDefaultDisplay();
-    int orientation = Configuration.ORIENTATION_UNDEFINED;
-    if(getOrient.getWidth()==getOrient.getHeight()){
-        orientation = Configuration.ORIENTATION_SQUARE;
-    } else{
-        if(getOrient.getWidth() < getOrient.getHeight()){
-            orientation = Configuration.ORIENTATION_PORTRAIT;
-        }else {
-             orientation = Configuration.ORIENTATION_LANDSCAPE;
-        }
+    public static int getPlayerScore()
+    {
+        return playerScore;
     }
-    return orientation;
-} */
+
 }
