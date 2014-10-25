@@ -1,0 +1,78 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="edu.sjsu.techknowgeek.fingerninja.stats">
+
+    <TextView
+        android:id="@+id/stat_welcome"
+        android:text="@string/stats_welcome"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/activity_vertical_margin"
+        android:layout_centerHorizontal="true"/>
+
+    <TableLayout
+        android:layout_below="@id/stat_welcome"
+        android:layout_width="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_height="match_parent">
+        <TableRow>
+            <TextView
+                android:id="@+id/hs_user_label"
+                android:text="User Highscore:"/>
+            <TextView
+                android:id="@+id/hs_user_score"
+                android:text="9999"/>
+        </TableRow>
+        <TableRow>
+            <TextView
+                android:id="@+id/hs_overall_label"
+                android:text="Overall Highscore:"/>
+            <TextView
+                android:id="@+id/hs_overall_score"
+                android:text="9999"/>
+        </TableRow>
+        <TableRow>
+            <TextView
+                android:text="--Average Highscores--"
+                android:layout_width="match_parent"/>
+        </TableRow>
+        <TableRow>
+            <TextView
+                android:id="@+id/hs_avg_overall_label"
+                android:text="Overall: "/>
+            <TextView
+                android:id="@+id/hs_avg_overall_score"
+                android:text="9999"/>
+        </TableRow>
+        <TableRow>
+            <TextView
+                android:id="@+id/hs_avg_ulasthr_label"
+                android:text="User Last Hr: "/>
+            <TextView
+                android:id="@+id/hs_avg_ulasthr_score"
+                android:text="9999"/>
+        </TableRow>
+        <TableRow>
+            <TextView
+                android:id="@+id/hs_avg_ulastwk_label"
+                android:text="User Last Week: "/>
+            <TextView
+                android:id="@+id/hs_avg_ulastwk_score"
+                android:text="9999"/>
+        </TableRow>
+        <TableRow>
+            <TextView
+                android:id="@+id/hs_avg_ulastm_label"
+                android:text="User Last Month: "/>
+            <TextView
+                android:id="@+id/hs_avg_ulastm_score"
+                android:text="9999"/>
+        </TableRow>
+    </TableLayout>
+
+</RelativeLayout>
