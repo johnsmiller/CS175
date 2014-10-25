@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">FingerNinja</string>
+    <string name="app_name">Finger Ninja</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_tab">TabActivity</string>
     <string name="title_section1">Section 1</string>
@@ -10,5 +10,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_stats">Statisitics</string>
     <string name="stats_welcome">Welcome to the Leaderboard!</string>
+    <string name="title_activity_game1">Game1</string>
+    <string name="hello_world">Hello world!</string>
 
 </resources>

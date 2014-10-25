@@ -7,6 +7,7 @@ import android.app.ActionBar;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.support.v13.app.FragmentPagerAdapter;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
@@ -42,6 +43,9 @@ public class TabActivity extends Activity implements ActionBar.TabListener {
         // Set up the action bar.
         final ActionBar actionBar = getActionBar();
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+        actionBar.setDisplayShowTitleEnabled(false);
+        actionBar.setDisplayShowHomeEnabled(false);
+
 
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
@@ -109,6 +113,11 @@ public class TabActivity extends Activity implements ActionBar.TabListener {
     public void onTabReselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
     }
 
+    public void launchGame1(View view)
+    {
+        this.startActivity(new Intent(this, Game1.class));
+    }
+
     /**
      * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
      * one of the sections/tabs/pages.
@@ -129,6 +138,7 @@ public class TabActivity extends Activity implements ActionBar.TabListener {
                 case 1:
                     return SetUserMode.newInstance(position + 1);
                 case 2:
+                    StatsFragment.updateStats();
                     return StatsFragment.newInstance(position + 1);
             }
             return null;
@@ -185,7 +195,7 @@ public class TabActivity extends Activity implements ActionBar.TabListener {
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                 Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_tab, container, false);
+            View rootView = inflater.inflate(R.layout.fragment_exercise, container, false);
             return rootView;
         }
     }
