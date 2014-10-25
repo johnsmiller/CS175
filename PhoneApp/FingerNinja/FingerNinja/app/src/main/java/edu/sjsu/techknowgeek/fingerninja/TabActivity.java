@@ -10,13 +10,11 @@ import android.app.FragmentTransaction;
 import android.support.v13.app.FragmentPagerAdapter;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 
 public class TabActivity extends Activity implements ActionBar.TabListener {
@@ -125,7 +123,15 @@ public class TabActivity extends Activity implements ActionBar.TabListener {
         public Fragment getItem(int position) {
             // getItem is called to instantiate the fragment for the given page.
             // Return a PlaceholderFragment (defined as a static inner class below).
-            return PlaceholderFragment.newInstance(position + 1);
+            switch (position) {
+                case 0:
+                    return ExerciseMode.newInstance(position + 1);
+                case 1:
+                    return SetUserMode.newInstance(position + 1);
+                case 2:
+                    return StatsActivity.newInstance(position + 1);
+            }
+            return null;
         }
 
         @Override
@@ -152,7 +158,7 @@ public class TabActivity extends Activity implements ActionBar.TabListener {
     /**
      * A placeholder fragment containing a simple view.
      */
-    public static class PlaceholderFragment extends Fragment {
+    public static class ExerciseMode extends Fragment {
         /**
          * The fragment argument representing the section number for this
          * fragment.
@@ -163,21 +169,54 @@ public class TabActivity extends Activity implements ActionBar.TabListener {
          * Returns a new instance of this fragment for the given section
          * number.
          */
-        public static PlaceholderFragment newInstance(int sectionNumber) {
-            PlaceholderFragment fragment = new PlaceholderFragment();
+        public static ExerciseMode newInstance(int sectionNumber) {
+            ExerciseMode fragment = new ExerciseMode();
             Bundle args = new Bundle();
             args.putInt(ARG_SECTION_NUMBER, sectionNumber);
             fragment.setArguments(args);
             return fragment;
         }
 
-        public PlaceholderFragment() {
+        public ExerciseMode() {
         }
 
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                 Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_tab, container, false);
+            return rootView;
+        }
+    }
+
+    /**
+     * A placeholder fragment containing a simple view.
+     */
+    public static class SetUserMode extends Fragment {
+        /**
+         * The fragment argument representing the section number for this
+         * fragment.
+         */
+        private static final String ARG_SECTION_NUMBER = "section_number";
+
+        /**
+         * Returns a new instance of this fragment for the given section
+         * number.
+         */
+        public static SetUserMode newInstance(int sectionNumber) {
+            SetUserMode fragment = new SetUserMode();
+            Bundle args = new Bundle();
+            args.putInt(ARG_SECTION_NUMBER, sectionNumber);
+            fragment.setArguments(args);
+            return fragment;
+        }
+
+        public SetUserMode() {
+        }
+
+        @Override
+        public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                                 Bundle savedInstanceState) {
+            View rootView = inflater.inflate(R.layout.fragment_set_user, container, false);
             return rootView;
         }
     }
