@@ -1,16 +1,13 @@
 package edu.sjsu.techknowgeek.fingerninja;
 
-import android.app.Activity;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
 
-public class StatsActivity extends Fragment {
+public class StatsFragment extends Fragment {
 
     /**
      * The fragment argument representing the section number for this
@@ -18,19 +15,21 @@ public class StatsActivity extends Fragment {
      */
     private static final String ARG_SECTION_NUMBER = "section_number";
 
+    public static final String TAB_TITLE = "Statistics";
+
     /**
      * Returns a new instance of this fragment for the given section
      * number.
      */
-    public static StatsActivity newInstance(int sectionNumber) {
-        StatsActivity fragment = new StatsActivity();
+    public static StatsFragment newInstance(int sectionNumber) {
+        StatsFragment fragment = new StatsFragment();
         Bundle args = new Bundle();
         args.putInt(ARG_SECTION_NUMBER, sectionNumber);
         fragment.setArguments(args);
         return fragment;
     }
 
-    public StatsActivity() {
+    public StatsFragment() {
     }
 
     @Override
@@ -38,6 +37,10 @@ public class StatsActivity extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.activity_stats, container, false);
         return rootView;
+    }
+
+    public void updateStats() {
+
     }
 
 }

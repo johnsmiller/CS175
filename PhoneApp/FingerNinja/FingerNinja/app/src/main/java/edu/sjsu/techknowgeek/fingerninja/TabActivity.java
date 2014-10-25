@@ -129,7 +129,7 @@ public class TabActivity extends Activity implements ActionBar.TabListener {
                 case 1:
                     return SetUserMode.newInstance(position + 1);
                 case 2:
-                    return StatsActivity.newInstance(position + 1);
+                    return StatsFragment.newInstance(position + 1);
             }
             return null;
         }
@@ -145,11 +145,11 @@ public class TabActivity extends Activity implements ActionBar.TabListener {
             Locale l = Locale.getDefault();
             switch (position) {
                 case 0:
-                    return getString(R.string.title_section1).toUpperCase(l);
+                    return ExerciseMode.TAB_TITLE;
                 case 1:
-                    return getString(R.string.title_section2).toUpperCase(l);
+                    return SetUserMode.TAB_TITLE;
                 case 2:
-                    return getString(R.string.title_section3).toUpperCase(l);
+                    return StatsFragment.TAB_TITLE;
             }
             return null;
         }
@@ -164,6 +164,8 @@ public class TabActivity extends Activity implements ActionBar.TabListener {
          * fragment.
          */
         private static final String ARG_SECTION_NUMBER = "section_number";
+
+        public static final String TAB_TITLE = "Exercise";
 
         /**
          * Returns a new instance of this fragment for the given section
@@ -197,6 +199,8 @@ public class TabActivity extends Activity implements ActionBar.TabListener {
          * fragment.
          */
         private static final String ARG_SECTION_NUMBER = "section_number";
+
+        public static final String TAB_TITLE = "Set User";
 
         /**
          * Returns a new instance of this fragment for the given section
