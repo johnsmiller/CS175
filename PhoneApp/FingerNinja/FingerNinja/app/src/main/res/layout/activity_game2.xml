@@ -5,17 +5,6 @@
     android:layout_height="match_parent"
     tools:context="edu.sjsu.techknowgeek.fingerninja.Game2">
 
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/Click_Me"
-        android:id="@+id/game2Button"
-        android:layout_marginTop="50dp"
-        android:layout_marginLeft="50dp"
-        android:onClick="buttonClicked"
-        />
-
     <android.gesture.GestureOverlayView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -28,6 +17,15 @@
         android:layout_alignParentStart="true">
 
         </android.gesture.GestureOverlayView>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/Click_Me"
+        android:id="@+id/game2Button"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="50dp"
+        />
 
 
 </RelativeLayout>

@@ -148,7 +148,7 @@ public class TabActivity extends Activity implements ActionBar.TabListener {
                 case 1:
                     return SetUserMode.newInstance(position + 1);
                 case 2:
-                    StatsFragment.updateStats();
+                    //TODO: StatsFragment.updateStats();
                     return StatsFragment.newInstance(position + 1);
             }
             return null;

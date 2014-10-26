@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
@@ -12,7 +13,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 
-public class Game2 extends Activity {
+public class Game2 extends Activity implements View.OnTouchListener{
 
     private static int screenWidth;
     private static int screenHeight;
@@ -33,6 +34,8 @@ public class Game2 extends Activity {
 
         button = (Button) findViewById(R.id.game2Button);
         relativeLayout = (RelativeLayout) findViewById(R.id.game2RelativeLayout);
+
+        button.setOnTouchListener(this);
 
         timer = null;
     }
@@ -106,5 +109,25 @@ public class Game2 extends Activity {
         //TODO: Display "game over" screen?
 
         this.finish();
+    }
+
+    /**
+     * Called when a touch event is dispatched to a view. This allows listeners to
+     * get a chance to respond before the target view.
+     *
+     * @param v     The view the touch event has been dispatched to.
+     * @param event The MotionEvent object containing full information about
+     *              the event.
+     * @return True if the listener has consumed the event, false otherwise.
+     */
+    @Override
+    public boolean onTouch(View v, MotionEvent event) {
+        switch ( event.getAction() ) {
+            case MotionEvent.ACTION_DOWN:
+                buttonClicked(null);
+            case MotionEvent.ACTION_UP:
+                break;
+        }
+        return true;
     }
 }
