@@ -12,7 +12,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 
-public class Game1 extends Activity {
+public class Game3 extends Activity {
 
     private static int screenWidth;
     private static int screenHeight;
@@ -27,7 +27,7 @@ public class Game1 extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_game1);
+        setContentView(R.layout.activity_game3);
 
         getActionBar().hide(); //hide the actionbar
 

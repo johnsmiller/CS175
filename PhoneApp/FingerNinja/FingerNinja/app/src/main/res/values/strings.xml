@@ -12,5 +12,8 @@
     <string name="stats_welcome">Welcome to the Leaderboard!</string>
     <string name="title_activity_game1">Game1</string>
     <string name="hello_world">Hello world!</string>
+    <string name="Click_Me">Click Me!</string>
+    <string name="title_activity_game2">Game 2</string>
+    <string name="title_activity_game3">Game 3</string>
 
 </resources>

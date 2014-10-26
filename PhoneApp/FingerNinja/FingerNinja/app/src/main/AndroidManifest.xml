@@ -23,6 +23,22 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="edu.sjsu.techknowgeek.fingerninja.TabActivity" />
         </activity>
+        <activity
+            android:name=".Game2"
+            android:label="@string/title_activity_game2"
+            android:parentActivityName=".TabActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="edu.sjsu.techknowgeek.fingerninja.TabActivity" />
+        </activity>
+        <activity
+            android:name=".Game3"
+            android:label="@string/title_activity_game3"
+            android:parentActivityName=".TabActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="edu.sjsu.techknowgeek.fingerninja.TabActivity" />
+        </activity>
     </application>
 
 </manifest>

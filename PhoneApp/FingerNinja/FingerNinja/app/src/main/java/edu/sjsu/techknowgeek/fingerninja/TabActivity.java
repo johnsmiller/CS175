@@ -118,6 +118,16 @@ public class TabActivity extends Activity implements ActionBar.TabListener {
         this.startActivity(new Intent(this, Game1.class));
     }
 
+    public void launchGame2(View view)
+    {
+        this.startActivity(new Intent(this, Game2.class));
+    }
+
+    public void launchGame3(View view)
+    {
+        this.startActivity(new Intent(this, Game3.class));
+    }
+
     /**
      * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
      * one of the sections/tabs/pages.
@@ -166,7 +176,7 @@ public class TabActivity extends Activity implements ActionBar.TabListener {
     }
 
     /**
-     * A placeholder fragment containing a simple view.
+     * ExerciseMode fragment
      */
     public static class ExerciseMode extends Fragment {
         /**
@@ -175,6 +185,9 @@ public class TabActivity extends Activity implements ActionBar.TabListener {
          */
         private static final String ARG_SECTION_NUMBER = "section_number";
 
+        /**
+         * The fragment title for the tab bar
+         */
         public static final String TAB_TITLE = "Exercise";
 
         /**
@@ -199,6 +212,8 @@ public class TabActivity extends Activity implements ActionBar.TabListener {
             return rootView;
         }
     }
+
+
 
     /**
      * A placeholder fragment containing a simple view.

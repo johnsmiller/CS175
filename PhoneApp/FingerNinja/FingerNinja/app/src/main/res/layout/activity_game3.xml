@@ -3,7 +3,7 @@
     android:id="@id/game1RelativeLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="edu.sjsu.techknowgeek.fingerninja.Game1">
+    tools:context="edu.sjsu.techknowgeek.fingerninja.Game3">
 
 
     <Button
