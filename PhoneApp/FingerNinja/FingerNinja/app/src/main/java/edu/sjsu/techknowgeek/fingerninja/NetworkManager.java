@@ -10,12 +10,14 @@ import java.util.HashMap;
 
 public class NetworkManager {
 
+    public static final String IP_ADDRESS = "127.0.0.1";
+    public static final int PORT = 7890;
+
     private static Socket socket;
     private static BufferedWriter writer;
     private static BufferedReader reader;
 
-    public static void createSocket(String ip, int port) {
-
+    private static void createSocket(String ip, int port) {
         try {
             socket = new Socket(ip, port);
             reader = new BufferedReader(
@@ -66,10 +68,15 @@ public class NetworkManager {
 
     private static String messageServer(String input){
         String output = "";
+
         try {
-            writer.write(input);
-            writer.flush();
-            output = reader.readLine();
+            createSocket(IP_ADDRESS, PORT);
+            if(socket != null) {
+                writer.write(input);
+                writer.flush();
+                output = reader.readLine();
+                socket.close();
+            }
         } catch (IOException ioe) {
             ioe.printStackTrace();
         }

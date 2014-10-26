@@ -7,11 +7,10 @@
     <string name="title_section1">Section 1</string>
     <string name="title_section2">Section 2</string>
     <string name="title_section3">Section 3</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="title_activity_stats">Statisitics</string>
+    <string name="title_activity_stats">Statistics</string>
     <string name="stats_welcome">Welcome to the Leaderboard!</string>
     <string name="title_activity_game1">Game1</string>
-    <string name="hello_world">Hello world!</string>
+    <string name="title_fragment_setuser">Please enter your User name</string>
     <string name="Click_Me">Click Me!</string>
     <string name="title_activity_game2">Game 2</string>
     <string name="title_activity_game3">Game 3</string>

@@ -17,8 +17,6 @@ public class StatsFragment extends Fragment {
     private static final String ARG_SECTION_NUMBER = "section_number";
 
     public static final String TAB_TITLE = "Statistics";
-    private static final String IP_ADDRESS = "127.0.0.1";
-    private static final int PORT = 7890;
 
     private static View rootView;
 
@@ -43,7 +41,6 @@ public class StatsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_stats, container, false);
-        NetworkManager.createSocket(IP_ADDRESS, PORT);
         return rootView;
     }
 
