@@ -30,16 +30,17 @@ public class StatsFragment extends Fragment {
     }
 
     public StatsFragment() {
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.activity_stats, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_stats, container, false);
         return rootView;
     }
 
-    public void updateStats() {
+    public static void updateStats() {
         // Need to implement Connection Code and updating information here.
 
         String input = "";

@@ -16,7 +16,9 @@
         android:layout_above="@+id/button"
         android:layout_alignLeft="@+id/button"
         android:layout_alignStart="@+id/button"
-        android:layout_marginBottom="25dp" />
+        android:layout_marginBottom="25dp"
+        android:onClick="launchGame1"
+        />
 
     <Button
         android:layout_width="wrap_content"
