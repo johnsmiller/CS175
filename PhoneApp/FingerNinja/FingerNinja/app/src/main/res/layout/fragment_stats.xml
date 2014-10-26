@@ -12,66 +12,81 @@
         android:id="@+id/stat_welcome"
         android:text="@string/stats_welcome"
         android:layout_width="wrap_content"
-        android:layout_height="@dimen/activity_vertical_margin"
-        android:layout_centerHorizontal="true"/>
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
 
     <TableLayout
         android:layout_below="@id/stat_welcome"
         android:layout_width="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
         <TableRow>
             <TextView
                 android:id="@+id/hs_user_label"
-                android:text="User Highscore:"/>
+                android:text="User Highscore:"
+                android:textSize="15dp"/>
             <TextView
                 android:id="@+id/hs_user_score"
-                android:text="9999"/>
+                android:text="9999"
+                android:textSize="15dp"/>
         </TableRow>
         <TableRow>
             <TextView
                 android:id="@+id/hs_overall_label"
-                android:text="Overall Highscore:"/>
+                android:text="Overall Highscore:"
+                android:textSize="15dp"/>
             <TextView
                 android:id="@+id/hs_overall_score"
-                android:text="9999"/>
+                android:text="9999"
+                android:textSize="15dp"/>
         </TableRow>
         <TableRow>
             <TextView
-                android:text="--Average Highscores--"
+                android:text="--Average Highscores-"
+                android:textSize="15dp"
                 android:layout_width="match_parent"/>
         </TableRow>
         <TableRow>
             <TextView
                 android:id="@+id/hs_avg_overall_label"
-                android:text="Overall: "/>
+                android:text="Overall: "
+                android:textSize="15dp"/>
             <TextView
                 android:id="@+id/hs_avg_overall_score"
-                android:text="9999"/>
+                android:text="9999"
+                android:textSize="15dp"/>
         </TableRow>
         <TableRow>
             <TextView
                 android:id="@+id/hs_avg_ulasthr_label"
-                android:text="User Last Hr: "/>
+                android:text="User Last Hr: "
+                android:textSize="15dp"/>
             <TextView
                 android:id="@+id/hs_avg_ulasthr_score"
-                android:text="9999"/>
+                android:text="9999"
+                android:textSize="15dp"/>
         </TableRow>
         <TableRow>
             <TextView
                 android:id="@+id/hs_avg_ulastwk_label"
-                android:text="User Last Week: "/>
+                android:text="User Last Week: "
+                android:textSize="15dp"/>
             <TextView
                 android:id="@+id/hs_avg_ulastwk_score"
-                android:text="9999"/>
+                android:text="9999"
+                android:textSize="15dp"/>
         </TableRow>
         <TableRow>
             <TextView
                 android:id="@+id/hs_avg_ulastm_label"
-                android:text="User Last Month: "/>
+                android:text="User Last Month: "
+                android:textSize="15dp"/>
             <TextView
                 android:id="@+id/hs_avg_ulastm_score"
-                android:text="9999"/>
+                android:text="9999"
+                android:textSize="15dp"/>
         </TableRow>
     </TableLayout>
 
