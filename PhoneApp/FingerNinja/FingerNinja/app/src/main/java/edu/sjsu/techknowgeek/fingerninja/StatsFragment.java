@@ -6,11 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import java.util.HashMap;
-
 
 public class StatsFragment extends Fragment {
-    public static HashMap<String, Integer> scoreManager = new HashMap();
 
     /**
      * The fragment argument representing the section number for this
@@ -43,7 +40,10 @@ public class StatsFragment extends Fragment {
     }
 
     public void updateStats() {
+        // Need to implement Connection Code and updating information here.
 
+        String input = "";
+
+        //if()
     }
-
 }
