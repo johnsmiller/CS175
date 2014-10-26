@@ -12,7 +12,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 
-public class Game1 extends Activity {
+public class Game2 extends Activity {
 
     private static int screenWidth;
     private static int screenHeight;
@@ -27,12 +27,12 @@ public class Game1 extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_game1);
+        setContentView(R.layout.activity_game2);
 
         getActionBar().hide(); //hide the actionbar
 
-        button = (Button) findViewById(R.id.game1Button);
-        relativeLayout = (RelativeLayout) findViewById(R.id.game1RelativeLayout);
+        button = (Button) findViewById(R.id.game2Button);
+        relativeLayout = (RelativeLayout) findViewById(R.id.game2RelativeLayout);
 
         timer = null;
     }
@@ -41,7 +41,7 @@ public class Game1 extends Activity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.game1, menu);
+        getMenuInflater().inflate(R.menu.game2, menu);
         return true;
     }
 

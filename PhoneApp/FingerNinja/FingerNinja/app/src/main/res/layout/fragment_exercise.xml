@@ -26,7 +26,9 @@
         android:text="Game 2"
         android:id="@+id/button"
         android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:onClick="launchGame2"
+        />
 
     <Button
         android:layout_width="wrap_content"
@@ -35,6 +37,8 @@
         android:id="@+id/button3"
         android:layout_below="@+id/button"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="25dp" />
+        android:layout_marginTop="25dp"
+        android:onClick="launchGame3"
+        />
 
 </RelativeLayout>

@@ -14,12 +14,13 @@
         android:textStyle="bold" />
 
     <EditText
-        android:layout_width="wrap_content"
+        android:layout_width="296dp"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
-        android:text="Name"
+        android:text="User Name"
         android:ems="10"
         android:id="@+id/editText"
         android:layout_gravity="center"
-        android:textSize="50dp" />
+        android:textSize="50dp"
+        android:textAlignment="center" />
 </FrameLayout>
