@@ -8,24 +8,16 @@ import java.io.OutputStreamWriter;
 import java.net.Socket;
 import java.util.HashMap;
 
-public class NetworkManager extends HashMap<NetworkManager.ScoreCats, Integer> {
-    public enum ScoreCats {
-        USER,
-        OVERALL,
-        AVG_OVERALL,
-        AVG_USER_HR,
-        AVG_USER_WK,
-        AVG_USER_M
-    }
+public class NetworkManager {
 
-    private Socket socket;
-    private BufferedWriter writer;
-    private BufferedReader reader;
+    private static Socket socket;
+    private static BufferedWriter writer;
+    private static BufferedReader reader;
 
-    private void createSocket(String ip, String port, String socketData) {
+    public static void createSocket(String ip, int port) {
 
         try {
-            socket = new Socket(ip, Integer.parseInt(port));
+            socket = new Socket(ip, port);
             reader = new BufferedReader(
                     new InputStreamReader(socket.getInputStream()));
 
@@ -36,7 +28,7 @@ public class NetworkManager extends HashMap<NetworkManager.ScoreCats, Integer> {
         }
     }
 
-    public boolean registerUser(String aUserName) {
+    public static boolean registerUser(String aUserName) {
         String response = messageServer("register:"+aUserName);
 
         if(response.equals("Okay\n")){
@@ -49,7 +41,7 @@ public class NetworkManager extends HashMap<NetworkManager.ScoreCats, Integer> {
         }
     }
 
-    public boolean sendGameStats(String aUserName, String aGameName, int score){
+    public static boolean sendGameStats(String aUserName, String aGameName, int score){
         String response = messageServer(
                 String.format("%s\t%s\t%s\t%d","results:", aUserName, aGameName, score));
 
@@ -63,21 +55,16 @@ public class NetworkManager extends HashMap<NetworkManager.ScoreCats, Integer> {
         }
     }
 
-    public void getGameStats(String aUserName){
+    public static String[] getGameStats(String aUserName){
         String response = messageServer("statistics:" + aUserName);
 
         if(!response.matches("[A-z]*(\t\\d*){6}") ){
             System.err.print("Something funny with parsing stats\n");
         }
-
-        int i = 1;
-        String[] parts = response.split("\t");
-        while(i < parts.length && i <ScoreCats.values().length){
-            this.put(ScoreCats.values()[i], Integer.parseInt(parts[i]));
-        }
+        return response.split("\t");
     }
 
-    private String messageServer(String input){
+    private static String messageServer(String input){
         String output = "";
         try {
             writer.write(input);

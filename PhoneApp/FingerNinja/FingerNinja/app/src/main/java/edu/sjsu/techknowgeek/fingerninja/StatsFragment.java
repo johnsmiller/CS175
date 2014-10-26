@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 
 public class StatsFragment extends Fragment {
@@ -16,7 +17,12 @@ public class StatsFragment extends Fragment {
     private static final String ARG_SECTION_NUMBER = "section_number";
 
     public static final String TAB_TITLE = "Statistics";
+    private static final String IP_ADDRESS = "127.0.0.1";
+    private static final int PORT = 7890;
 
+    private static View rootView;
+
+    public static NetworkManager netManager;
     /**
      * Returns a new instance of this fragment for the given section
      * number.
@@ -36,15 +42,26 @@ public class StatsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_stats, container, false);
+        rootView = inflater.inflate(R.layout.fragment_stats, container, false);
+        NetworkManager.createSocket(IP_ADDRESS, PORT);
         return rootView;
     }
 
     public static void updateStats() {
-        // Need to implement Connection Code and updating information here.
+        String[] scores = NetworkManager.getGameStats("userName");
+        // Updates Android UI with scores from hashmap
+        TextView avgOS = (TextView) rootView.findViewById(R.id.hs_avg_overall_score);
+        TextView uLastHrS = (TextView) rootView.findViewById(R.id.hs_avg_ulasthr_score);
+        TextView uLastWkS = (TextView) rootView.findViewById(R.id.hs_avg_ulastwk_score);
+        TextView uLastMS = (TextView) rootView.findViewById(R.id.hs_avg_ulastm_score);
+        TextView overallS = (TextView) rootView.findViewById(R.id.hs_overall_score);
+        TextView userS = (TextView) rootView.findViewById(R.id.hs_user_score);
 
-        String input = "";
-
-        //if()
+        userS.setText(scores[1]);
+        overallS.setText(scores[2]);
+        avgOS.setText(scores[3]);
+        uLastHrS.setText(scores[4]);
+        uLastWkS.setText(scores[5]);
+        uLastMS.setText(scores[6]);
     }
 }
