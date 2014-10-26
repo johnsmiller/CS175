@@ -81,6 +81,8 @@ public class Game1 extends Activity {
         //move button to random location within screen bounds
         button.setX(widthRand);
         button.setY(heightRand);
+
+        //TODO: Increment score
     }
 
     private void createTimer()
@@ -102,7 +104,7 @@ public class Game1 extends Activity {
 
     private void gameOver()
     {
-        //TODO: Upload results to server
+        //TODO: Upload score results to server
         //TODO: Display "game over" screen?
 
         this.finish();
