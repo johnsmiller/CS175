@@ -1,6 +1,7 @@
 package edu.sjsu.techknowgeek.fingerninja;
 
 import android.app.Activity;
+import android.gesture.GestureOverlayView;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -20,6 +21,7 @@ public class Game2 extends Activity implements View.OnTouchListener{
 
     private static Button button;
     private static RelativeLayout relativeLayout;
+    private static GestureOverlayView gestureOveriew;
 
     private static Timer timer;
     private static final long TIMER_DURATION = 20*1000; //Time in miliseconds that the game lasts
@@ -34,8 +36,9 @@ public class Game2 extends Activity implements View.OnTouchListener{
 
         button = (Button) findViewById(R.id.game2Button);
         relativeLayout = (RelativeLayout) findViewById(R.id.game2RelativeLayout);
+        gestureOveriew = (GestureOverlayView) findViewById(R.id.gestureOverlayView2);
 
-        button.setOnTouchListener(this);
+        gestureOveriew.setOnTouchListener(this);
 
         timer = null;
     }
@@ -69,6 +72,8 @@ public class Game2 extends Activity implements View.OnTouchListener{
         if(timer == null) {
             createTimer();
         }
+
+        //TODO: Score++
 
         //Update screenWidth/screenHeight
         screenWidth = relativeLayout.getMeasuredWidth();
@@ -122,12 +127,24 @@ public class Game2 extends Activity implements View.OnTouchListener{
      */
     @Override
     public boolean onTouch(View v, MotionEvent event) {
-        switch ( event.getAction() ) {
-            case MotionEvent.ACTION_DOWN:
-                buttonClicked(null);
-            case MotionEvent.ACTION_UP:
-                break;
+        if(checkBounds(event))
+            buttonClicked(null);
+        if(event.getAction() == MotionEvent.ACTION_UP){
+            //TODO: Reset Score
         }
         return true;
+    }
+
+    private boolean checkBounds(MotionEvent event)
+    {
+        float xLow = button.getX();
+        float xHigh = button.getX() + button.getMeasuredWidth();
+        float yLow = button.getY();
+        float yHigh = button.getY() + button.getMeasuredHeight();
+
+        float eventX = event.getX();
+        float eventY = event.getY();
+
+        return((eventX >= xLow && eventX <= xHigh) && (eventY >= yLow && eventY <= yHigh));
     }
 }

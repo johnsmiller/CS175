@@ -14,5 +14,7 @@
     <string name="Click_Me">Click Me!</string>
     <string name="title_activity_game2">Game 2</string>
     <string name="title_activity_game3">Game 3</string>
+    <string name="swipe_over">Swipe Over</string>
+    <string name="hungry_frog">Hungry Frog</string>
 
 </resources>
