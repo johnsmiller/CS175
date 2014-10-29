@@ -19,7 +19,7 @@ public class Game3 extends Activity {
 
     private static Button button;
     private static RelativeLayout relativeLayout;
-    private CountdownTimer countDownTimer;
+    private CountDownTimer countDownTimer;
     private static Timer timer;
     private static final long TIMER_DURATION = 20*1000; //Time in miliseconds that the game lasts
     private final long startTime = 20 * 1000;
@@ -46,13 +46,25 @@ public class Game3 extends Activity {
 
     }
 
-    public class TheAmountOfTimeRemaining extends CountDownTimer {
+    class TheAmountOfTimeRemaining extends CountDownTimer {
 
         public TheAmountOfTimeRemaining(long startTime, long interval) {
 
             super(startTime, interval);
 
         }
+
+        @Override
+        public void onTick(long l) {
+
+        }
+
+        @Override
+        public void onFinish() {
+
+        }
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
