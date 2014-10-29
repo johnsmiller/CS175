@@ -54,12 +54,14 @@ public class NetworkManager {
     }
 
     public static String[] getGameStats(String aUserName){
-        String response = messageServer("statistics:" + aUserName);
-
+        //String response = messageServer("statistics:" + aUserName);
+        String response = "game1\t2\t1100\t2\t4\t10\t7";
         if(!response.matches("[A-z]*(\t\\d*){6}") ){
             System.err.print("Something funny with parsing stats\n");
         }
-        return response.split("\t");
+        String[] parsedResp = response.split("\t");
+        System.err.println(parsedResp);
+        return parsedResp;
     }
 
     private static String messageServer(String input){
