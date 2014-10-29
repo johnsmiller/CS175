@@ -56,7 +56,7 @@ public class Game3 extends Activity {
 
         @Override
         public void onTick(long l) {
-
+        timeRemaining.setText(": " + l / 1000);
         }
 
         @Override
@@ -99,17 +99,7 @@ public class Game3 extends Activity {
         screenHeight = relativeLayout.getMeasuredHeight();
         currentScore++;
         score.setText(" " + currentScore);
-        timeRemaining.setText(" "+timer.toString());
-        //calculate new random position
-            //heavier weights for upper 50% of screen
-       // float widthRand = Math.round(Math.random()*(screenWidth-button.getMeasuredWidth()+1));
-       // float heightRand = Math.round(Math.random() * (screenHeight - button.getMeasuredHeight() + 1));
-        //if(heightRand > (.5 * screenHeight)) //get new random if near bottom
-         //   heightRand = Math.round(Math.random()*(screenHeight-button.getMeasuredHeight()+1));
 
-//        //move button to random location within screen bounds
-//        button.setX(widthRand);
-//        button.setY(heightRand);
     }
 
     private void createTimer()
