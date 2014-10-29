@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 public class StatsFragment extends Fragment {
@@ -41,7 +42,7 @@ public class StatsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_stats, container, false);
-        //updateStats();
+        updateStats();
         return rootView;
     }
 
@@ -55,11 +56,16 @@ public class StatsFragment extends Fragment {
         TextView overallS = (TextView) rootView.findViewById(R.id.hs_overall_score);
         TextView userS = (TextView) rootView.findViewById(R.id.hs_user_score);
 
-        userS.setText(scores[1]);
-        overallS.setText(scores[2]);
-        avgOS.setText(scores[3]);
-        uLastHrS.setText(scores[4]);
-        uLastWkS.setText(scores[5]);
-        uLastMS.setText(scores[6]);
+        if(scores.length == 7) {
+            userS.setText(scores[1]);
+            overallS.setText(scores[2]);
+            avgOS.setText(scores[3]);
+            uLastHrS.setText(scores[4]);
+            uLastWkS.setText(scores[5]);
+            uLastMS.setText(scores[6]);
+        } else {
+            Toast.makeText(rootView.getContext(), "Stats could not be parsed", Toast.LENGTH_LONG).show();
+        }
     }
+
 }
