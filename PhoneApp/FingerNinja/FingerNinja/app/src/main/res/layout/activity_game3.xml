@@ -11,9 +11,49 @@
         android:layout_height="wrap_content"
         android:text="@string/Click_Me"
         android:id="@+id/game1Button"
-        android:layout_marginTop="50dp"
-        android:layout_marginLeft="50dp"
         android:onClick="buttonClicked"
-        />
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Score"
+        android:id="@+id/scoreText"
+        android:layout_alignParentTop="true"
+        android:layout_alignLeft="@+id/game1Button"
+        android:layout_alignStart="@+id/game1Button" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="0"
+        android:id="@+id/score"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/scoreText"
+        android:layout_toEndOf="@+id/scoreText" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Time Remaining"
+        android:id="@+id/timeRemainingText"
+        android:layout_alignParentBottom="true"
+        android:layout_toLeftOf="@+id/timeRemaining"
+        android:layout_toStartOf="@+id/timeRemaining" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="0"
+        android:id="@+id/timeRemaining"
+        android:layout_toEndOf="@+id/game1Button"
+        android:layout_alignParentBottom="true"
+        android:layout_toRightOf="@+id/game1Button"
+        android:layout_alignParentEnd="true" />
 
 </RelativeLayout>
