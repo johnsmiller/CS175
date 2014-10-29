@@ -20,11 +20,7 @@ public class NetworkManager {
     private static void createSocket(String ip, int port) {
         try {
             socket = new Socket(ip, port);
-            reader = new BufferedReader(
-                    new InputStreamReader(socket.getInputStream()));
 
-            writer = new BufferedWriter(
-                    new OutputStreamWriter(socket.getOutputStream()));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -72,6 +68,11 @@ public class NetworkManager {
         try {
             createSocket(IP_ADDRESS, PORT);
             if(socket != null) {
+                reader = new BufferedReader(
+                        new InputStreamReader(socket.getInputStream()));
+
+                writer = new BufferedWriter(
+                        new OutputStreamWriter(socket.getOutputStream()));
                 writer.write(input);
                 writer.flush();
                 output = reader.readLine();

@@ -7,15 +7,20 @@ import android.app.ActionBar;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.support.v13.app.FragmentPagerAdapter;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 
 public class TabActivity extends Activity implements ActionBar.TabListener {
@@ -76,6 +81,29 @@ public class TabActivity extends Activity implements ActionBar.TabListener {
                             .setText(mSectionsPagerAdapter.getPageTitle(i))
                             .setTabListener(this));
         }
+
+        // Check for network connections
+        String message = "";
+
+        try
+        {
+            ConnectivityManager cMgr = (ConnectivityManager)
+                    this.getSystemService(Context.CONNECTIVITY_SERVICE);
+            if(cMgr != null)
+            {
+                NetworkInfo netInfo = cMgr.getActiveNetworkInfo();
+                message = "View1 "+ netInfo.toString();
+                Log.i("NetInfoTest", message);
+            }
+        }
+        catch(Exception e)
+        {
+            message = "That didn't work: "+e.toString();
+            Log.i("NetInfoTest", message);
+
+        }
+
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
     }
 
 

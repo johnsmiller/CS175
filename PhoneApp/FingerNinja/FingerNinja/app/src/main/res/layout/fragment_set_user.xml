@@ -19,8 +19,20 @@
         android:inputType="textPersonName"
         android:text="User Name"
         android:ems="10"
-        android:id="@+id/editText"
+        android:id="@+id/User_Name_Input"
         android:layout_gravity="center"
         android:textSize="50dp"
         android:textAlignment="center" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/IP_Address"
+        android:layout_gravity="center_horizontal|bottom"
+        android:inputType="text"
+        android:singleLine="true"
+        android:text="IP Address"
+        android:textAlignment="center"
+        android:textColor="#ff818181" />
+
 </FrameLayout>
