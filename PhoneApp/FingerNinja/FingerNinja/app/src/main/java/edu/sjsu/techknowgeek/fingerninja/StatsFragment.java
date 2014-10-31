@@ -5,8 +5,12 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TableLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.ArrayList;
 
 
 public class StatsFragment extends Fragment {
@@ -20,6 +24,12 @@ public class StatsFragment extends Fragment {
     public static final String TAB_TITLE = "Statistics";
 
     private static View rootView;
+    private final int[] IDS = {
+        R.id.g1_stats,
+        R.id.g2_stats,
+        R.id.g3_stats
+    };
+    private ArrayList<TextView> scores;
 
     public static NetworkManager netManager;
     /**
@@ -42,27 +52,26 @@ public class StatsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_stats, container, false);
+        scores = new ArrayList<TextView>();
+
+        for(int i = 0; i < IDS.length; i++){
+            TableLayout table = (TableLayout) rootView.findViewById(IDS[i]);
+            for(int j = 0; j < NetworkManager.SCORE_CATEGORIES.length; j++){
+                scores.add((TextView) ((TableRow)table.getChildAt(j)).getChildAt(1));
+            }
+        }
+
         updateStats();
         return rootView;
     }
 
-    public static void updateStats() {
-        String[] scores = NetworkManager.getGameStats("userName");
-        // Updates Android UI with scores from hashmap
-        TextView avgOS = (TextView) rootView.findViewById(R.id.hs_avg_overall_score);
-        TextView uLastHrS = (TextView) rootView.findViewById(R.id.hs_avg_ulasthr_score);
-        TextView uLastWkS = (TextView) rootView.findViewById(R.id.hs_avg_ulastwk_score);
-        TextView uLastMS = (TextView) rootView.findViewById(R.id.hs_avg_ulastm_score);
-        TextView overallS = (TextView) rootView.findViewById(R.id.hs_overall_score);
-        TextView userS = (TextView) rootView.findViewById(R.id.hs_user_score);
+    public void updateStats() {
+        String[] scorestxt = NetworkManager.getGameStats("userName");
 
-        if(scores.length == 7) {
-            userS.setText(scores[1]);
-            overallS.setText(scores[2]);
-            avgOS.setText(scores[3]);
-            uLastHrS.setText(scores[4]);
-            uLastWkS.setText(scores[5]);
-            uLastMS.setText(scores[6]);
+        if(scorestxt.length == 18) {
+            for(int i = 0; i < scores.size(); i++) {
+                scores.get(i).setText(scorestxt[i]);
+            }
         } else {
             Toast.makeText(rootView.getContext(), "Stats could not be parsed", Toast.LENGTH_LONG).show();
         }

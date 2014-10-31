@@ -16,77 +16,364 @@
         android:textSize="20dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
-
-    <TableLayout
+    <TextView
+        android:id="@+id/g1_welcome"
+        android:text="Hungry Frog"
         android:layout_below="@id/stat_welcome"
         android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16dp"
+
         android:layout_centerHorizontal="true"
-        android:layout_height="wrap_content">
+        android:textStyle="bold" />
+    <TableLayout
+        android:layout_below="@id/g1_welcome"
+        android:layout_width="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_height="wrap_content"
+        android:id="@+id/g1_stats">
         <TableRow>
             <TextView
                 android:id="@+id/hs_user_label"
                 android:text="User Highscore:"
-                android:textSize="15dp"/>
+                android:textSize="14dp"/>
             <TextView
                 android:id="@+id/hs_user_score"
                 android:text="9999"
-                android:textSize="15dp"/>
+                android:textSize="14dp"/>
         </TableRow>
         <TableRow>
             <TextView
                 android:id="@+id/hs_overall_label"
                 android:text="Overall Highscore:"
-                android:textSize="15dp"/>
+                android:textSize="14dp"/>
             <TextView
                 android:id="@+id/hs_overall_score"
                 android:text="9999"
-                android:textSize="15dp"/>
+                android:textSize="14dp"/>
         </TableRow>
-        <TableRow>
-            <TextView
-                android:text="--Average Highscores-"
-                android:textSize="15dp"
-                android:layout_width="match_parent"/>
-        </TableRow>
+        <TableRow></TableRow>
         <TableRow>
             <TextView
                 android:id="@+id/hs_avg_overall_label"
                 android:text="Overall: "
-                android:textSize="15dp"/>
+                android:textSize="14dp"/>
             <TextView
                 android:id="@+id/hs_avg_overall_score"
                 android:text="9999"
-                android:textSize="15dp"/>
+                android:textSize="14dp"/>
         </TableRow>
         <TableRow>
             <TextView
                 android:id="@+id/hs_avg_ulasthr_label"
                 android:text="User Last Hr: "
-                android:textSize="15dp"/>
+                android:textSize="14dp"/>
             <TextView
                 android:id="@+id/hs_avg_ulasthr_score"
                 android:text="9999"
-                android:textSize="15dp"/>
+                android:textSize="14dp"/>
         </TableRow>
         <TableRow>
             <TextView
                 android:id="@+id/hs_avg_ulastwk_label"
                 android:text="User Last Week: "
-                android:textSize="15dp"/>
+                android:textSize="14dp"/>
             <TextView
                 android:id="@+id/hs_avg_ulastwk_score"
                 android:text="9999"
-                android:textSize="15dp"/>
+                android:textSize="14dp"/>
         </TableRow>
         <TableRow>
             <TextView
                 android:id="@+id/hs_avg_ulastm_label"
                 android:text="User Last Month: "
-                android:textSize="15dp"/>
+                android:textSize="14dp"/>
             <TextView
                 android:id="@+id/hs_avg_ulastm_score"
                 android:text="9999"
-                android:textSize="15dp"/>
+                android:textSize="14dp"/>
+        </TableRow>
+    </TableLayout>
+
+    <TextView
+        android:id="@+id/g2_welcome"
+        android:text="Finger Down, Swipe Around"
+        android:layout_below="@id/g1_stats"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16dp"
+
+        android:layout_centerHorizontal="true"
+        android:textStyle="bold"/>
+    <TableLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/g2_stats"
+        android:layout_below="@id/g2_welcome"
+        android:layout_alignLeft="@+id/g1_stats"
+        android:layout_alignStart="@+id/g1_stats">
+
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+
+            <TextView
+                android:id="@+id/textView"
+                android:text="User Highscore:"
+                android:textSize="14dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/textView2"
+                android:text="9999"
+                android:textSize="14dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+
+            <TextView
+                android:id="@+id/textView3"
+                android:text="Overall Highscore:"
+                android:textSize="14dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/textView4"
+                android:text="9999"
+                android:textSize="14dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+
+            <TextView
+                android:id="@+id/textView5"
+                android:text="Overall: "
+                android:textSize="14dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/textView6"
+                android:text="9999"
+                android:textSize="14dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+
+            <TextView
+                android:id="@+id/textView7"
+                android:text="User Last Hr: "
+                android:textSize="14dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/textView8"
+                android:text="9999"
+                android:textSize="14dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+
+            <TextView
+                android:id="@+id/textView9"
+                android:text="User Last Week: "
+                android:textSize="14dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/textView10"
+                android:text="9999"
+                android:textSize="14dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+
+            <TextView
+                android:id="@+id/textView11"
+                android:text="User Last Month: "
+                android:textSize="14dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/textView12"
+                android:text="9999"
+                android:textSize="14dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </TableRow>
+    </TableLayout>
+
+    <TextView
+        android:id="@+id/g3_welcome"
+        android:text="Rapid Fire"
+        android:layout_below="@id/g2_stats"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16dp"
+
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentLeft="false"
+        android:layout_alignParentBottom="false"
+        android:layout_alignParentEnd="false"
+        android:layout_alignParentStart="false"
+        android:textStyle="bold"/>
+    <TableLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/g3_stats"
+        android:layout_below="@id/g3_welcome"
+        android:layout_alignLeft="@+id/g2_stats"
+        android:layout_alignStart="@+id/g2_stats">
+
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" >
+
+            <TextView
+                android:id="@+id/textView13"
+                android:text="User Highscore:"
+                android:textSize="14dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/textView14"
+                android:text="9999"
+                android:textSize="14dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" >
+
+            <TextView
+                android:id="@+id/textView15"
+                android:text="Overall Highscore:"
+                android:textSize="14dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/textView16"
+                android:text="9999"
+                android:textSize="14dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" >
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" >
+
+            <TextView
+                android:id="@+id/textView17"
+                android:text="Overall: "
+                android:textSize="14dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/textView18"
+                android:text="9999"
+                android:textSize="14dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" >
+
+            <TextView
+                android:id="@+id/textView19"
+                android:text="User Last Hr: "
+                android:textSize="14dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/textView20"
+                android:text="9999"
+                android:textSize="14dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" >
+
+            <TextView
+                android:id="@+id/textView21"
+                android:text="User Last Week: "
+                android:textSize="14dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/textView22"
+                android:text="9999"
+                android:textSize="14dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" >
+
+            <TextView
+                android:id="@+id/textView23"
+                android:text="User Last Month: "
+                android:textSize="14dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/textView24"
+                android:text="9999"
+                android:textSize="14dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
         </TableRow>
     </TableLayout>
 

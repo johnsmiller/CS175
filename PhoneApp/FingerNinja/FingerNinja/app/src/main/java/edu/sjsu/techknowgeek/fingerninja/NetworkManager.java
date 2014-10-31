@@ -5,14 +5,25 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.lang.reflect.Array;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class NetworkManager {
 
     public static final String IP_ADDRESS = "127.0.0.1";
     public static final int PORT = 7890;
+    public static final String[] SCORE_CATEGORIES = {
+            "User highscore: ",
+            "All highscore:",
+            "All Avg:",
+            "User Avg:",
+            "User Past Hr Avg:",
+            "User Past Wk Avg:",
+            "User Past Mn Avg:",
 
+    };
     private static Socket socket;
     private static BufferedWriter writer;
     private static BufferedReader reader;
@@ -55,13 +66,24 @@ public class NetworkManager {
 
     public static String[] getGameStats(String aUserName){
         //String response = messageServer("statistics:" + aUserName);
-        String response = "game1\t2\t1100\t2\t4\t10\t7";
-        if(!response.matches("[A-z]*(\t\\d*){6}") ){
+        String response = "game1\t2\t1100\t2\t4\t10\t7\ngame2\t4\t2200\t4\t8\t20\t14\ngame3\t4\t2200\t4\t8\t20\t14\n.";
+        if(!response.matches("([A-z]*(\t\\d*){6}\n)*[.]") ){
             System.err.print("Something funny with parsing stats\n");
         }
-        String[] parsedResp = response.split("\t");
-        System.err.println(parsedResp);
-        return parsedResp;
+
+        String[] games = response.split("\n");
+
+        ArrayList<String> parsedResp = new ArrayList<String>();
+        for(int i = 0; i < games.length-1; i++) {
+            String[] scores = games[i].split("\t");
+            //parsedResp.add("---"+ scores[0]+"---");
+            for(int j=1; j < SCORE_CATEGORIES.length; j++) {
+                //scores[j] = SCORE_CATEGORIES[j] + scores[j];
+                parsedResp.add(scores[j]);
+            }
+        }
+
+        return parsedResp.toArray(new String[parsedResp.size()]);
     }
 
     private static String messageServer(String input){
