@@ -5,10 +5,8 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.lang.reflect.Array;
 import java.net.Socket;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class NetworkManager {
     public static final int PORT = 7890;
@@ -25,6 +23,7 @@ public class NetworkManager {
     private static String IP_ADDRESS;
     private static BufferedWriter writer;
     private static BufferedReader reader;
+    private static String currentUser;
 
     private static void createSocket(String ip, int port) {
         try {
@@ -35,8 +34,12 @@ public class NetworkManager {
         }
     }
 
-    public static boolean registerUser(String aUserName) {
-        String response = messageServer("register:"+aUserName);
+    public static void setUser(String aUserName) {
+        currentUser = aUserName;
+    }
+
+    public static boolean registerUser() {
+        String response = messageServer("register:"+ currentUser);
 
         if(response.equals("Okay\n")){
             return true;
@@ -48,9 +51,9 @@ public class NetworkManager {
         }
     }
 
-    public static boolean sendGameStats(String aUserName, String aGameName, int score){
+    public static boolean sendGameStats(String aGameName, int score){
         String response = messageServer(
-                String.format("%s\t%s\t%s\t%d","results:", aUserName, aGameName, score));
+                String.format("%s\t%s\t%s\t%d","results:", currentUser, aGameName, score));
 
         if(response.equals("Okay\n")){
             return true;
@@ -62,8 +65,8 @@ public class NetworkManager {
         }
     }
 
-    public static String[] getGameStats(String aUserName){
-        //String response = messageServer("statistics:" + aUserName);
+    public static String[] getGameStats(){
+        //String response = messageServer("statistics:" + currentUser);
         String response = "game1\t2\t1100\t2\t4\t10\t7\ngame2\t4\t2200\t4\t8\t20\t14\ngame3\t4\t2200\t4\t8\t20\t14\n.";
         if(!response.matches("([A-z]*(\t\\d*){6}\n)*[.]") ){
             System.err.print("Something funny with parsing stats\n");

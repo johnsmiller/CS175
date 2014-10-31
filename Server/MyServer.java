@@ -7,7 +7,7 @@ public final class MyServer extends Thread
 {
 	private static final int PORT=7890;
 	private static final int NUM_CONNECT=1;
-	private string message;
+	private String message;
 	private MyServer() {}
 	private HashMap<K, V> members;
 
