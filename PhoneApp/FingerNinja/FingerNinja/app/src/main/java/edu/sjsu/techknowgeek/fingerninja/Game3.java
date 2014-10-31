@@ -122,7 +122,7 @@ public class Game3 extends Activity {
 
     private void gameOver()
     {
-        //TODO: Upload results to server
+        NetworkManager.sendGameStats("Rapid_Fire", currentScore);
         //TODO: Display "game over" screen?
         //reset score to 0
         currentScore = 0;

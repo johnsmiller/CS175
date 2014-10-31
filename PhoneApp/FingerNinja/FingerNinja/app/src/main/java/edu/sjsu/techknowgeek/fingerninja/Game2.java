@@ -19,6 +19,8 @@ public class Game2 extends Activity implements View.OnTouchListener{
     private static int screenWidth;
     private static int screenHeight;
 
+    private int score;
+
     private static Button button;
     private static RelativeLayout relativeLayout;
     private static GestureOverlayView gestureOveriew;
@@ -33,6 +35,8 @@ public class Game2 extends Activity implements View.OnTouchListener{
         setContentView(R.layout.activity_game2);
 
         getActionBar().hide(); //hide the actionbar
+
+        score = 0;
 
         button = (Button) findViewById(R.id.game2Button);
         relativeLayout = (RelativeLayout) findViewById(R.id.game2RelativeLayout);
@@ -73,7 +77,7 @@ public class Game2 extends Activity implements View.OnTouchListener{
             createTimer();
         }
 
-        //TODO: Score++
+        score++;
 
         //Update screenWidth/screenHeight
         screenWidth = relativeLayout.getMeasuredWidth();
@@ -110,7 +114,7 @@ public class Game2 extends Activity implements View.OnTouchListener{
 
     private void gameOver()
     {
-        //TODO: Upload results to server
+        NetworkManager.sendGameStats("Swipe_Around", score);
         //TODO: Display "game over" screen?
 
         this.finish();
@@ -130,7 +134,7 @@ public class Game2 extends Activity implements View.OnTouchListener{
         if(checkBounds(event))
             buttonClicked(null);
         if(event.getAction() == MotionEvent.ACTION_UP){
-            //TODO: Reset Score
+            score = 0;
         }
         return true;
     }
