@@ -74,9 +74,7 @@ public class NetworkManager {
         ArrayList<String> parsedResp = new ArrayList<String>();
         for(int i = 0; i < games.length-1; i++) {
             String[] scores = games[i].split("\t");
-            //parsedResp.add("---"+ scores[0]+"---");
             for(int j=1; j < SCORE_CATEGORIES.length; j++) {
-                //scores[j] = SCORE_CATEGORIES[j] + scores[j];
                 parsedResp.add(scores[j]);
             }
         }
