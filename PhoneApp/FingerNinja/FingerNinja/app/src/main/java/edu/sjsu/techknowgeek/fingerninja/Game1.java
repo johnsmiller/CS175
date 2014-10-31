@@ -17,6 +17,8 @@ public class Game1 extends Activity {
     private static int screenWidth;
     private static int screenHeight;
 
+    private int score;
+
     private static Button button;
     private static RelativeLayout relativeLayout;
 
@@ -30,6 +32,8 @@ public class Game1 extends Activity {
         setContentView(R.layout.activity_game1);
 
         getActionBar().hide(); //hide the actionbar
+
+        score = 0;
 
         button = (Button) findViewById(R.id.game1Button);
         relativeLayout = (RelativeLayout) findViewById(R.id.game1RelativeLayout);
@@ -82,7 +86,7 @@ public class Game1 extends Activity {
         button.setX(widthRand);
         button.setY(heightRand);
 
-        //TODO: Increment score
+        score++;
     }
 
     private void createTimer()
@@ -104,7 +108,7 @@ public class Game1 extends Activity {
 
     private void gameOver()
     {
-        //TODO: Upload score results to server
+        NetworkManager.sendGameStats("Hungry_Frog", score);
         //TODO: Display "game over" screen?
 
         this.finish();
