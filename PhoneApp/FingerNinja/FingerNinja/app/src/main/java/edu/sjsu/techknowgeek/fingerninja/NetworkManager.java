@@ -25,15 +25,6 @@ public class NetworkManager {
     private static BufferedReader reader;
     private static String currentUser;
 
-    private static void createSocket(String ip, int port) {
-        try {
-            socket = new Socket(ip, port);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
     public static void setUser(String aUserName) {
         currentUser = aUserName;
     }
@@ -89,11 +80,10 @@ public class NetworkManager {
         IP_ADDRESS = anIP;
     }
 
-    private static String messageServer(String input){
+    private static String messageServer(String input) throws Exception{
         String output = "";
 
-        try {
-            createSocket(IP_ADDRESS, PORT);
+            socket = new Socket(IP_ADDRESS, PORT);
             if(socket != null) {
                 reader = new BufferedReader(
                         new InputStreamReader(socket.getInputStream()));
@@ -105,9 +95,7 @@ public class NetworkManager {
                 output = reader.readLine();
                 socket.close();
             }
-        } catch (IOException ioe) {
-            ioe.printStackTrace();
-        }
+
 
         return output;
     }
