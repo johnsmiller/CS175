@@ -16,5 +16,6 @@
     <string name="title_activity_game3">Game 3</string>
     <string name="swipe_over">Swipe Over</string>
     <string name="hungry_frog">Hungry Frog</string>
+    <string name="Default_IP_Addr">127.0.0.1</string>
 
 </resources>

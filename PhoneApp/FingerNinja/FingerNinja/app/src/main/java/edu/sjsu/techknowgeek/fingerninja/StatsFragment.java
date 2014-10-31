@@ -69,7 +69,7 @@ public class StatsFragment extends Fragment {
         String[] scorestxt = NetworkManager.getGameStats("userName");
 
         if(scorestxt.length == 18) {
-            for(int i = 0; i < scores.size(); i++) {
+            for(int i = 0; i < scorestxt.length; i++) {
                 scores.get(i).setText(scorestxt[i]);
             }
         } else {

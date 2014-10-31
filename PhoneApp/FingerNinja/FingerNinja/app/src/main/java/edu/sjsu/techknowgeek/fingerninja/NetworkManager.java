@@ -11,20 +11,18 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class NetworkManager {
-
-    public static final String IP_ADDRESS = "127.0.0.1";
     public static final int PORT = 7890;
     public static final String[] SCORE_CATEGORIES = {
-            "User highscore: ",
+            "User highscore:",
             "All highscore:",
             "All Avg:",
             "User Avg:",
             "User Past Hr Avg:",
             "User Past Wk Avg:",
             "User Past Mn Avg:",
-
     };
     private static Socket socket;
+    private static String IP_ADDRESS;
     private static BufferedWriter writer;
     private static BufferedReader reader;
 
@@ -84,6 +82,10 @@ public class NetworkManager {
         }
 
         return parsedResp.toArray(new String[parsedResp.size()]);
+    }
+
+    private static void setIP(String anIP){
+        IP_ADDRESS = anIP;
     }
 
     private static String messageServer(String input){
