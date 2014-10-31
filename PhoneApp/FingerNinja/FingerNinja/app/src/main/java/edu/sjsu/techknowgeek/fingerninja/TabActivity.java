@@ -20,7 +20,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import org.w3c.dom.Text;
 
 
 public class TabActivity extends Activity implements ActionBar.TabListener {
@@ -156,6 +159,11 @@ public class TabActivity extends Activity implements ActionBar.TabListener {
         this.startActivity(new Intent(this, Game3.class));
     }
 
+    public void onRegisterUser(View view){
+        NetworkManager.setUser(((TextView)findViewById(R.id.User_Name_Input)).getText().toString());
+        NetworkManager.registerUser();
+    }
+
     /**
      * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
      * one of the sections/tabs/pages.
@@ -255,6 +263,7 @@ public class TabActivity extends Activity implements ActionBar.TabListener {
 
         public static final String TAB_TITLE = "Set User";
 
+        private TextView userNameView;
         /**
          * Returns a new instance of this fragment for the given section
          * number.
@@ -274,6 +283,7 @@ public class TabActivity extends Activity implements ActionBar.TabListener {
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_set_user, container, false);
+            userNameView = (TextView)rootView.findViewById(R.id.User_Name_Input);
             return rootView;
         }
     }

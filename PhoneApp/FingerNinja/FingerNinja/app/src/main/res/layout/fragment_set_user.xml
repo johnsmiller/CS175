@@ -42,7 +42,6 @@
         android:id="@+id/button"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="50dp"
-        android:elegantTextHeight="false"
-        android:nestedScrollingEnabled="true" />
+        android:onClick="onRegisterUser" />
 
 </FrameLayout>
