@@ -18,3 +18,5 @@ PhoneApp/FingerNinja/FingerNinja/.idea/libraries
 PhoneApp/FingerNinja/FingerNinja/.DS_Store
 
 PhoneApp/FingerNinja/FingerNinja/build
+/Server/FingerciseServer/nbproject/private/
+/Server/FingerciseServer/build/
