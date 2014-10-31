@@ -76,15 +76,15 @@ public class NetworkManager {
         return parsedResp.toArray(new String[parsedResp.size()]);
     }
 
-    private static void setIP(String anIP){
+    public static void setIP(String anIP){
         IP_ADDRESS = anIP;
     }
 
-    private static String messageServer(String input) throws Exception{
+    private static String messageServer(String input){
         String output = "";
-
+        try {
             socket = new Socket(IP_ADDRESS, PORT);
-            if(socket != null) {
+            if (socket != null) {
                 reader = new BufferedReader(
                         new InputStreamReader(socket.getInputStream()));
 
@@ -95,7 +95,9 @@ public class NetworkManager {
                 output = reader.readLine();
                 socket.close();
             }
-
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         return output;
     }
