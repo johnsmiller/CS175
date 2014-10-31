@@ -160,8 +160,10 @@ public class TabActivity extends Activity implements ActionBar.TabListener {
     }
 
     public void onRegisterUser(View view){
-        NetworkManager.setUser(((TextView)findViewById(R.id.User_Name_Input)).getText().toString());
+        NetworkManager.setIP( ((TextView)findViewById(R.id.IP_Address)).getText().toString() );
+        NetworkManager.setUser( ((TextView)findViewById(R.id.User_Name_Input)).getText().toString() );
         NetworkManager.registerUser();
+
     }
 
     /**

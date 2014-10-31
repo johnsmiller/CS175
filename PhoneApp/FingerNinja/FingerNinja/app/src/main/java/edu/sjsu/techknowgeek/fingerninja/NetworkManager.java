@@ -85,7 +85,7 @@ public class NetworkManager {
         return parsedResp.toArray(new String[parsedResp.size()]);
     }
 
-    private static void setIP(String anIP){
+    public static void setIP(String anIP){
         IP_ADDRESS = anIP;
     }
 
