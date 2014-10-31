@@ -74,6 +74,7 @@ public class FingerciseServer extends Thread {
                 server = new ServerSocket(PORT, NUM_CONNECT);
                 Socket client = server.accept();
 
+                System.out.println("Client Connected: " + client.getRemoteSocketAddress().toString());
                 BufferedReader reader = new BufferedReader(
                         new InputStreamReader(client.getInputStream()));
 
