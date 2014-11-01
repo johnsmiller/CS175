@@ -64,13 +64,18 @@ public class NetworkManager {
 
     public static String[] getGameStats(){
         String response = messageServer("statistics:" + currentUser);
+        ArrayList<String> parsedResp = new ArrayList<String>();
+
         if(!response.matches("([A-z]*(\t\\d*){6}\n)*[.]") ){
             System.err.print("Something funny with parsing stats\n");
+        }
+        if(response.equals(".")) {
+            parsedResp.add(response);
+            return parsedResp.toArray(new String[1]);
         }
 
         String[] games = response.split("\n");
 
-        ArrayList<String> parsedResp = new ArrayList<String>();
         for(int i = 0; i < games.length-1; i++) {
             String[] scores = games[i].split("\t");
             for(int j=1; j < SCORE_CATEGORIES.length; j++) {

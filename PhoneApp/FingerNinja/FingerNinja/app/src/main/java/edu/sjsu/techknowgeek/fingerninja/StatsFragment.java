@@ -69,12 +69,15 @@ public class StatsFragment extends Fragment {
     public static void updateStats() {
         String[] scorestxt = NetworkManager.getGameStats();
 
-        if(scorestxt.length == 18) {
-            for(int i = 0; i < scorestxt.length; i++) {
+        if(scorestxt.length != 21) {
+            Toast.makeText(rootView.getContext(), "Stats was not parsed perfectly", Toast.LENGTH_LONG).show();
+        }
+        if(scores.size() >= scorestxt.length) {
+            for (int i = 0; i < scorestxt.length; i++) {
                 scores.get(i).setText(scorestxt[i]);
             }
         } else {
-            Toast.makeText(rootView.getContext(), "Stats could not be parsed", Toast.LENGTH_LONG).show();
+            Toast.makeText(rootView.getContext(), "Stats array was too large", Toast.LENGTH_LONG).show();
         }
     }
 
