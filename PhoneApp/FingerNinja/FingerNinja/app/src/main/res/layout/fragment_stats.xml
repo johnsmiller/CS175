@@ -250,6 +250,8 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_toLeftOf="@+id/g1_stats" />
+        android:layout_toLeftOf="@+id/g1_stats"
+        android:onClick="updateStats"
+        />
 
 </RelativeLayout>

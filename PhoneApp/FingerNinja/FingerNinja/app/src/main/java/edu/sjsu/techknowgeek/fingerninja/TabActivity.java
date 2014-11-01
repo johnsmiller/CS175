@@ -100,6 +100,7 @@ public class TabActivity extends Activity implements ActionBar.TabListener {
                             .setTabListener(this));
         }
 
+
         // Check for network connections
         String message = "";
 
@@ -201,7 +202,6 @@ public class TabActivity extends Activity implements ActionBar.TabListener {
             Toast.makeText(this.getBaseContext(), "Registration Failed :(", Toast.LENGTH_LONG).show();
         }
     }
-
 
     /**
      * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
@@ -323,8 +323,15 @@ public class TabActivity extends Activity implements ActionBar.TabListener {
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_set_user, container, false);
             userNameView = (TextView)rootView.findViewById(R.id.User_Name_Input);
+
+            userNameView.setText(NetworkManager.getIP_ADDRESS());
+            ((TextView) rootView.findViewById(R.id.User_Name_Input)).setText(NetworkManager.getUser());
+
             return rootView;
         }
     }
 
+    public void updateStats(View view) {
+        StatsFragment.updateStats();
+    }
 }

@@ -30,7 +30,7 @@ public class StatsFragment extends Fragment {
         R.id.g2_stats,
         R.id.g3_stats
     };
-    private ArrayList<TextView> scores;
+    private static ArrayList<TextView> scores;
 
     public static NetworkManager netManager;
     /**
@@ -66,7 +66,7 @@ public class StatsFragment extends Fragment {
         return rootView;
     }
 
-    public void updateStats() {
+    public static void updateStats() {
         String[] scorestxt = NetworkManager.getGameStats();
 
         if(scorestxt.length == 18) {
@@ -78,8 +78,4 @@ public class StatsFragment extends Fragment {
         }
     }
 
-
-    public void updateStats(View view) {
-        updateStats();
-    }
 }
