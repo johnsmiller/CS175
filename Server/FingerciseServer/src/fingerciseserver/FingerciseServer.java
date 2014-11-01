@@ -304,33 +304,45 @@ public class FingerciseServer extends Thread {
          */
         public Double[] getUserAverages() {
             Long currentTime = new GregorianCalendar().getTimeInMillis();
-            GregorianCalendar temp = new GregorianCalendar();
-            TreeMap<GregorianCalendar, Integer> mapValues = SCORES;
+            GregorianCalendar[] mapValues = SCORES.keySet().toArray(new GregorianCalendar[SCORES.size()]);
             Double[] ret = new Double[3];
-            Integer[] intValues;
+            ArrayList<Integer> monthValues = new ArrayList<>(), weekValues = new ArrayList<>(), hourValues = new ArrayList<>();
+            
+            for(int i = mapValues.length-1; i>=0; i--)
+            {
+                if(mapValues[i].getTimeInMillis()>currentTime-monthMili)
+                {
+                    //Is within last month
+                    monthValues.add(SCORES.get(mapValues[i]));
+                    if(mapValues[i].getTimeInMillis()>currentTime-weekMili)
+                    {
+                        //is within last week
+                        weekValues.add(SCORES.get(mapValues[i]));
+                        if(mapValues[i].getTimeInMillis()>currentTime-hourMili)
+                        {
+                            //is within last hour
+                            hourValues.add(SCORES.get(mapValues[i]));
+                        }
+                    }
+                }
+            }
 
             //Get Scores from last month, store in valuesIn, and store map in values
-            temp.setTimeInMillis(currentTime - monthMili);
-            mapValues = new TreeMap<>(mapValues.tailMap(temp, true));
-            intValues = mapValues.values().toArray(new Integer[0]);
-            ret[2] = getAverage(intValues);
+            ret[2] = getAverage(monthValues.toArray(new Integer[monthValues.size()]));
 
             //Get Scores from last week, store in valuesIn, and store map in values
-            temp.setTimeInMillis(currentTime - weekMili);
-            mapValues = new TreeMap<>(mapValues.tailMap(temp, true));
-            intValues = mapValues.values().toArray(new Integer[0]);
-            ret[1] = getAverage(intValues);
+            ret[1] = getAverage(weekValues.toArray(new Integer[weekValues.size()]));
 
             //Get Scores from last hour, store in valuesIn, and store map in values
-            temp.setTimeInMillis(currentTime - hourMili);
-            mapValues = new TreeMap<>(mapValues.tailMap(temp, true));
-            intValues = mapValues.values().toArray(new Integer[0]);
-            ret[0] = getAverage(intValues);
+            ret[0] = getAverage(hourValues.toArray(new Integer[hourValues.size()]));
 
             return ret;
         }
 
         private double getAverage(Integer[] intValues) {
+            if(intValues.length < 1)
+                return 0.0;
+            
             double score = 0.0;
 
             for (Integer i : intValues) {
