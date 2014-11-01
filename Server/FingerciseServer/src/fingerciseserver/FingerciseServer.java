@@ -102,7 +102,7 @@ public class FingerciseServer extends Thread {
                     ret = statistics();
                 }
                 System.out.println("Sending: " + ret + " to the client");
-                writer.write(ret);
+                writer.write(ret+".\n");
                 writer.flush();
                 System.out.println("Sent");
 
@@ -179,8 +179,6 @@ public class FingerciseServer extends Thread {
             System.out.println("Ret: :" + ret);
             ret += "\n";
         }
-
-        ret += ".\n";
 
         return ret;
     }
@@ -313,19 +311,19 @@ public class FingerciseServer extends Thread {
             //Get Scores from last month, store in valuesIn, and store map in values
             temp.setTimeInMillis(currentTime - monthMili);
             mapValues = new TreeMap<>(mapValues.tailMap(temp, true));
-            intValues = mapValues.values().toArray(new Integer[0]);
+            intValues = mapValues.values().toArray(new Integer[1]);
             ret[2] = getAverage(intValues);
 
             //Get Scores from last week, store in valuesIn, and store map in values
             temp.setTimeInMillis(currentTime - weekMili);
             mapValues = new TreeMap<>(mapValues.tailMap(temp, true));
-            intValues = mapValues.values().toArray(new Integer[0]);
+            intValues = mapValues.values().toArray(new Integer[1]);
             ret[1] = getAverage(intValues);
 
             //Get Scores from last hour, store in valuesIn, and store map in values
             temp.setTimeInMillis(currentTime - hourMili);
             mapValues = new TreeMap<>(mapValues.tailMap(temp, true));
-            intValues = mapValues.values().toArray(new Integer[0]);
+            intValues = mapValues.values().toArray(new Integer[1]);
             ret[0] = getAverage(intValues);
 
             return ret;
