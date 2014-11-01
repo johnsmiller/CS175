@@ -72,9 +72,11 @@ public class FingerciseServer extends Thread {
             ServerSocket server = null;
             try {
                 server = new ServerSocket(PORT, NUM_CONNECT);
+                System.out.println("Socket Opened");
                 Socket client = server.accept();
 
                 System.out.println("Client Connected: " + client.getRemoteSocketAddress().toString());
+                
                 BufferedReader reader = new BufferedReader(
                         new InputStreamReader(client.getInputStream()));
 
@@ -84,16 +86,19 @@ public class FingerciseServer extends Thread {
                 writer.write(WELCOME_MESSAGE);
 
                 message = reader.readLine();
+                
+                String ret = FAILURE_MESSAGE;
 
                 if (message.contains("register")) {
-                    writer.write(register());
+                    ret = register();
                 } else if (message.contains("result:")) {
-                    writer.write(result());
+                   ret = result();
                 } else if (message.contains("statistics:")) {
-                    writer.write(statistics());
-                } else {
-                    writer.write("Sorry\n");
+                    ret = statistics();
                 }
+                System.out.println("Sending: " + ret + " to the client");
+                writer.write(ret);
+                System.out.println("Sent");
 
             } catch (IOException ie) {
                 ie.printStackTrace();
@@ -101,6 +106,7 @@ public class FingerciseServer extends Thread {
                 if (server != null) {
                     try {
                         server.close();
+                        System.out.println("Socket Closed");
                     } catch (IOException ex) {
                         Logger.getLogger(FingerciseServer.class.getName()).log(Level.SEVERE, null, ex);
                     }
