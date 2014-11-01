@@ -271,7 +271,7 @@ public class FingerciseServer extends Thread {
 
         private final static long hourMili = 3600000; //number of miliseconds in an hour
         private final static long weekMili = 604800000; //number of miliseconds in a week
-        private final static long monthMili = (262800000 * 10); //number of miliseconds in a month
+        private final long monthMili = Math.round(2628000000.0); //number of miliseconds in a month
 
         public User(String name) {
             NAME = name;
@@ -313,6 +313,7 @@ public class FingerciseServer extends Thread {
                 if(mapValues[i].getTimeInMillis()>currentTime-monthMili)
                 {
                     //Is within last month
+                    System.out.println("Month fired!");
                     monthValues.add(SCORES.get(mapValues[i]));
                     if(mapValues[i].getTimeInMillis()>currentTime-weekMili)
                     {
