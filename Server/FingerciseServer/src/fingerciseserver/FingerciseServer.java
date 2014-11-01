@@ -15,6 +15,7 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.TreeMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -50,13 +51,13 @@ public class FingerciseServer extends Thread {
     private String message;
 
     private final HashMap<String, Game> games;
-    private ArrayList<String> names;
+    private HashSet<String> names;
 
     private final int MAX_GAMES = 3; //Must be greater than -1
 
     private FingerciseServer() {
         games = new HashMap<>(MAX_GAMES);
-        names = new ArrayList<>();
+        names = new HashSet<>();
     }
 
     public static void main(String args[]) {
@@ -72,28 +73,38 @@ public class FingerciseServer extends Thread {
             ServerSocket server = null;
             try {
                 server = new ServerSocket(PORT, NUM_CONNECT);
+                System.out.println("Socket Opened");
                 Socket client = server.accept();
 
                 System.out.println("Client Connected: " + client.getRemoteSocketAddress().toString());
+                
                 BufferedReader reader = new BufferedReader(
                         new InputStreamReader(client.getInputStream()));
-
+                
                 BufferedWriter writer = new BufferedWriter(
                         new OutputStreamWriter(client.getOutputStream()));
 
-                writer.write(WELCOME_MESSAGE);
-
+                //System.out.println("Sending Welcome");
+                //writer.write(WELCOME_MESSAGE);
+                //System.out.println("Sent Welcome");
+                
+                System.out.println("Message waiting");
                 message = reader.readLine();
+                System.out.println("Message: " + message);
+                
+                String ret = FAILURE_MESSAGE;
 
                 if (message.contains("register")) {
-                    writer.write(register());
+                    ret = register();
                 } else if (message.contains("result:")) {
-                    writer.write(result());
+                   ret = result();
                 } else if (message.contains("statistics:")) {
-                    writer.write(statistics());
-                } else {
-                    writer.write("Sorry\n");
+                    ret = statistics();
                 }
+                System.out.println("Sending: " + ret + " to the client");
+                writer.write(ret);
+                writer.flush();
+                System.out.println("Sent");
 
             } catch (IOException ie) {
                 ie.printStackTrace();
@@ -101,6 +112,7 @@ public class FingerciseServer extends Thread {
                 if (server != null) {
                     try {
                         server.close();
+                        System.out.println("Socket Closed");
                     } catch (IOException ex) {
                         Logger.getLogger(FingerciseServer.class.getName()).log(Level.SEVERE, null, ex);
                     }
@@ -113,7 +125,7 @@ public class FingerciseServer extends Thread {
         String userName = (message.substring(message.indexOf(":") + 1)).trim();
 
         for (Game g : games.values()) {
-            if (!g.addUser(userName)) {
+            if (!g.addUser(userName) || names.contains(userName)) {
                 return FAILURE_MESSAGE;
             }
         }
