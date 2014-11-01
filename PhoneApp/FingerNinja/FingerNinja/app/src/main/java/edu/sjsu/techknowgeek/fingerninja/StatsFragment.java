@@ -1,6 +1,7 @@
 package edu.sjsu.techknowgeek.fingerninja;
 
 import android.app.Fragment;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -61,7 +62,7 @@ public class StatsFragment extends Fragment {
             }
         }
 
-        updateStats();
+        //updateStats();
         return rootView;
     }
 

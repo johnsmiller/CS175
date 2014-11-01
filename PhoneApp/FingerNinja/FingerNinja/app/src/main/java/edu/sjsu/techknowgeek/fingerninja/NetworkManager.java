@@ -29,6 +29,12 @@ public class NetworkManager {
         currentUser = aUserName;
     }
 
+    public static String getUser() {
+        return currentUser;
+    }
+
+    public static String getIP_ADDRESS() { return IP_ADDRESS;}
+
     public static boolean registerUser() {
         String response = messageServer("register:"+ currentUser);
 
