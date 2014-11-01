@@ -14,7 +14,6 @@ public class NetworkManager {
             "User highscore:",
             "All highscore:",
             "All Avg:",
-            "User Avg:",
             "User Past Hr Avg:",
             "User Past Wk Avg:",
             "User Past Mn Avg:",
@@ -78,7 +77,7 @@ public class NetworkManager {
 
         for(int i = 0; i < games.length-1; i++) {
             String[] scores = games[i].split("\t");
-            for(int j=1; j < SCORE_CATEGORIES.length; j++) {
+            for(int j=1; j < scores.length; j++) {
                 parsedResp.add(scores[j]);
             }
         }
@@ -102,7 +101,12 @@ public class NetworkManager {
                         new OutputStreamWriter(socket.getOutputStream()));
                 writer.write(input+"\n");
                 writer.flush();
-                output = reader.readLine();
+                String currLine = "";
+                while(!currLine.equals(".")) {
+                    currLine = reader.readLine();
+                    output += currLine + "\n";
+                }
+
                 socket.close();
             }
         } catch (Exception e) {
