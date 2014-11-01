@@ -96,7 +96,7 @@ public class FingerciseServer extends Thread {
 
                 if (message.contains("register")) {
                     ret = register();
-                } else if (message.contains("result:")) {
+                } else if (message.contains("results:")) {
                    ret = result();
                 } else if (message.contains("statistics:")) {
                     ret = statistics();
@@ -123,9 +123,12 @@ public class FingerciseServer extends Thread {
 
     private String register() {
         String userName = (message.substring(message.indexOf(":") + 1)).trim();
+        
+        if(names.contains(userName))
+            return FAILURE_MESSAGE;
 
         for (Game g : games.values()) {
-            if (!g.addUser(userName) || names.contains(userName)) {
+            if (!g.addUser(userName)) {
                 return FAILURE_MESSAGE;
             }
         }
@@ -144,8 +147,10 @@ public class FingerciseServer extends Thread {
 
         if (!games.containsKey(split[1])) //If game has not yet been made, initialize
         {
+            System.out.println("Creating game: " + split[1]);
             Game game = new Game(split[1]);
             for (String s : names) {
+                System.out.println("Adding User: " + s);
                 game.addUser(s);
             }
         }
