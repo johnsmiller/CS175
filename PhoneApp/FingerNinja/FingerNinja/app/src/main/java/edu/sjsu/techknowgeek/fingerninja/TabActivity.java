@@ -11,6 +11,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.StrictMode;
 import android.support.v13.app.FragmentPagerAdapter;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
@@ -47,6 +48,10 @@ public class TabActivity extends Activity implements ActionBar.TabListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tab);
+
+        // Added for networking options
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
 
         // Set up the action bar.
         final ActionBar actionBar = getActionBar();
@@ -162,8 +167,13 @@ public class TabActivity extends Activity implements ActionBar.TabListener {
     public void onRegisterUser(View view){
         NetworkManager.setIP( ((TextView)findViewById(R.id.IP_Address)).getText().toString() );
         NetworkManager.setUser( ((TextView)findViewById(R.id.User_Name_Input)).getText().toString() );
-        NetworkManager.registerUser();
+        boolean success = NetworkManager.registerUser();
 
+        if(!success){
+            Toast.makeText(this.getBaseContext(), "Registered!", Toast.LENGTH_LONG).show();
+        } else {
+            Toast.makeText(this.getBaseContext(), "Registration Failed :(", Toast.LENGTH_LONG).show();
+        }
     }
 
 

@@ -96,6 +96,7 @@ public class NetworkManager {
                 socket.close();
             }
         } catch (Exception e) {
+            System.err.println(e.getMessage());
             e.printStackTrace();
         }
 
