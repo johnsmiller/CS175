@@ -69,16 +69,25 @@ public class StatsFragment extends Fragment {
     public static void updateStats() {
         String[] scorestxt = NetworkManager.getGameStats();
 
-        if(scorestxt.length != 21) {
-            Toast.makeText(rootView.getContext(), "Stats was not parsed perfectly", Toast.LENGTH_LONG).show();
-        }
-        if(scores.size() >= scorestxt.length) {
-            for (int i = 0; i < scorestxt.length; i++) {
-                scores.get(i).setText(scorestxt[i]);
+//        if(scorestxt.length != 21) {
+//            Toast.makeText(rootView.getContext(), "Stats was not parsed perfectly", Toast.LENGTH_LONG).show();
+//        }
+
+        for (int i = 0; i < scorestxt.length; i++) {
+            String[] gameScores = scorestxt[i].split("\t");
+            for(int j = 1; j < gameScores.length; j++){
+                if(gameScores[0].equals(Game1.GAME_NAME)) {
+                    scores.get(j-1).setText(gameScores[j]);
+                } else if (gameScores[0].equals(Game2.GAME_NAME)) {
+                    scores.get(j+NetworkManager.SCORE_CATEGORIES.length-1).setText(gameScores[j]);
+                } else if (gameScores[0].equals(Game3.GAME_NAME)) {
+                    scores.get(j+(2*NetworkManager.SCORE_CATEGORIES.length)-1).setText(gameScores[j]);
+                } else {
+                    Toast.makeText(rootView.getContext(), "Stats was not parsed perfectly", Toast.LENGTH_LONG).show();
+                }
             }
-        } else {
-            Toast.makeText(rootView.getContext(), "Stats array was too large", Toast.LENGTH_LONG).show();
         }
+
     }
 
 }

@@ -14,6 +14,8 @@ import android.os.CountDownTimer;
 
 public class Game3 extends Activity {
 
+    public final static String GAME_NAME = "Rapid_Fire";
+
     private static int screenWidth;
     private static int screenHeight;
 
@@ -122,7 +124,7 @@ public class Game3 extends Activity {
 
     private void gameOver()
     {
-        NetworkManager.sendGameStats("Rapid_Fire", currentScore);
+        NetworkManager.sendGameStats(GAME_NAME, currentScore);
         //TODO: Display "game over" screen?
         //reset score to 0
         currentScore = 0;

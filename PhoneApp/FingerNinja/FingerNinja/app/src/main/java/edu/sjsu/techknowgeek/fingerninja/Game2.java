@@ -16,6 +16,7 @@ import java.util.TimerTask;
 
 public class Game2 extends Activity implements View.OnTouchListener{
 
+    public final static String GAME_NAME = "Swipe_Around";
     private static int screenWidth;
     private static int screenHeight;
 
@@ -114,7 +115,7 @@ public class Game2 extends Activity implements View.OnTouchListener{
 
     private void gameOver()
     {
-        NetworkManager.sendGameStats("Swipe_Around", score);
+        NetworkManager.sendGameStats(GAME_NAME, score);
         //TODO: Display "game over" screen?
 
         this.finish();

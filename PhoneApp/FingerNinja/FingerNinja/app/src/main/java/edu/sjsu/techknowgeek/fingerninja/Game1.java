@@ -14,6 +14,7 @@ import java.util.TimerTask;
 
 public class Game1 extends Activity {
 
+    public final static String GAME_NAME = "Hungry_Frog";
     private static int screenWidth;
     private static int screenHeight;
 
@@ -108,7 +109,7 @@ public class Game1 extends Activity {
 
     private void gameOver()
     {
-        NetworkManager.sendGameStats("Hungry_Frog", score);
+        NetworkManager.sendGameStats(GAME_NAME, score);
         //TODO: Display "game over" screen?
 
         this.finish();

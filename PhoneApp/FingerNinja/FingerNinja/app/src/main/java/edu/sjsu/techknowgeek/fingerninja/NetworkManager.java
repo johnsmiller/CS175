@@ -16,7 +16,7 @@ public class NetworkManager {
             "All Avg:",
             "User Past Hr Avg:",
             "User Past Wk Avg:",
-            "User Past Mn Avg:",
+            "User Past Mn Avg:"
     };
     private static Socket socket;
     private static String IP_ADDRESS;
@@ -76,10 +76,7 @@ public class NetworkManager {
         String[] games = response.split("\n");
 
         for(int i = 0; i < games.length-1; i++) {
-            String[] scores = games[i].split("\t");
-            for(int j=1; j < scores.length; j++) {
-                parsedResp.add(scores[j]);
-            }
+            parsedResp.add(games[i]);
         }
 
         return parsedResp.toArray(new String[parsedResp.size()]);
