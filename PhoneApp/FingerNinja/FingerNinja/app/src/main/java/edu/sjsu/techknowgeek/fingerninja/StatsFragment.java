@@ -77,4 +77,8 @@ public class StatsFragment extends Fragment {
         }
     }
 
+
+    public void updateStats(View view) {
+        updateStats();
+    }
 }
