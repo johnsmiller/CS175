@@ -153,6 +153,7 @@ public class FingerciseServer extends Thread {
                 System.out.println("Adding User: " + s);
                 game.addUser(s);
             }
+            games.put(split[1], game);
         }
 
         for (Game g : games.values()) {
@@ -169,13 +170,17 @@ public class FingerciseServer extends Thread {
         String ret = "";
 
         for (Game g : games.values()) {
+            System.out.println("Stats for game: " + g + " and user: " + userName);
             for (String s : g.getStats(userName)) {
+                if(s == null)
+                    System.out.println("NULL STATS");
                 ret += s + "\t";
             }
+            System.out.println("Ret: :" + ret);
             ret += "\n";
         }
 
-        ret += ".";
+        ret += ".\n";
 
         return ret;
     }
@@ -233,6 +238,7 @@ public class FingerciseServer extends Thread {
          */
         public String[] getStats(String userName) {
             if (!users.containsKey(userName)) {
+                System.out.println("User Not Found in game: " + NAME);
                 return null;
             }
 
@@ -306,19 +312,19 @@ public class FingerciseServer extends Thread {
 
             //Get Scores from last month, store in valuesIn, and store map in values
             temp.setTimeInMillis(currentTime - monthMili);
-            mapValues = (TreeMap<GregorianCalendar, Integer>) mapValues.tailMap(temp, true);
+            mapValues = new TreeMap<>(mapValues.tailMap(temp, true));
             intValues = mapValues.values().toArray(new Integer[0]);
             ret[2] = getAverage(intValues);
 
             //Get Scores from last week, store in valuesIn, and store map in values
             temp.setTimeInMillis(currentTime - weekMili);
-            mapValues = (TreeMap<GregorianCalendar, Integer>) mapValues.tailMap(temp, true);
+            mapValues = new TreeMap<>(mapValues.tailMap(temp, true));
             intValues = mapValues.values().toArray(new Integer[0]);
             ret[1] = getAverage(intValues);
 
             //Get Scores from last hour, store in valuesIn, and store map in values
             temp.setTimeInMillis(currentTime - hourMili);
-            mapValues = (TreeMap<GregorianCalendar, Integer>) mapValues.tailMap(temp, true);
+            mapValues = new TreeMap<>(mapValues.tailMap(temp, true));
             intValues = mapValues.values().toArray(new Integer[0]);
             ret[0] = getAverage(intValues);
 
