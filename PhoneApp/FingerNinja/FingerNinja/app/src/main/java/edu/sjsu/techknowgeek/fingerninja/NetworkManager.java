@@ -90,7 +90,7 @@ public class NetworkManager {
 
                 writer = new BufferedWriter(
                         new OutputStreamWriter(socket.getOutputStream()));
-                writer.write(input);
+                writer.write(input+"\n");
                 writer.flush();
                 output = reader.readLine();
                 socket.close();
