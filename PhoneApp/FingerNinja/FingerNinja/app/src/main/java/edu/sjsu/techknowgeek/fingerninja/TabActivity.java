@@ -325,7 +325,7 @@ public class TabActivity extends Activity implements ActionBar.TabListener {
             userNameView = (TextView)rootView.findViewById(R.id.User_Name_Input);
 
             userNameView.setText(NetworkManager.getIP_ADDRESS());
-            ((TextView) rootView.findViewById(R.id.User_Name_Input)).setText(NetworkManager.getUser());
+            ((TextView) rootView.findViewById(R.id.IP_Address)).setText(NetworkManager.getIP_ADDRESS());
 
             return rootView;
         }
