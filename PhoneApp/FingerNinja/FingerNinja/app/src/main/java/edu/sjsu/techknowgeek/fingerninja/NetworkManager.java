@@ -32,9 +32,9 @@ public class NetworkManager {
     public static boolean registerUser() {
         String response = messageServer("register:"+ currentUser);
 
-        if(response.equals("Okay\n")){
+        if(response.equals("Okay")){
             return true;
-        } else if (response.equals("Sorry\n")){
+        } else if (response.equals("Sorry")){
             return false;
         } else {
             System.err.print("Something funny with the server\n");
@@ -57,8 +57,7 @@ public class NetworkManager {
     }
 
     public static String[] getGameStats(){
-        //String response = messageServer("statistics:" + currentUser);
-        String response = "game1\t2\t1100\t2\t4\t10\t7\ngame2\t4\t2200\t4\t8\t20\t14\ngame3\t4\t2200\t4\t8\t20\t14\n.";
+        String response = messageServer("statistics:" + currentUser);
         if(!response.matches("([A-z]*(\t\\d*){6}\n)*[.]") ){
             System.err.print("Something funny with parsing stats\n");
         }

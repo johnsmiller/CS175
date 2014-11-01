@@ -167,9 +167,9 @@ public class TabActivity extends Activity implements ActionBar.TabListener {
     public void onRegisterUser(View view){
         NetworkManager.setIP( ((TextView)findViewById(R.id.IP_Address)).getText().toString() );
         NetworkManager.setUser( ((TextView)findViewById(R.id.User_Name_Input)).getText().toString() );
-        boolean success = NetworkManager.registerUser();
+        boolean failure = NetworkManager.registerUser();
 
-        if(!success){
+        if(failure){
             Toast.makeText(this.getBaseContext(), "Registered!", Toast.LENGTH_LONG).show();
         } else {
             Toast.makeText(this.getBaseContext(), "Registration Failed :(", Toast.LENGTH_LONG).show();
