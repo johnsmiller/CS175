@@ -1,4 +1,9 @@
 package com.sjsu.techknowgeek.snakeonaplane;
+import android.database.sqlite.*;
+import android.database.*;
+import android.content.*;
+import android.util.*;
+
 
 import android.app.ActionBar;
 import android.app.Activity;
@@ -10,6 +15,9 @@ import android.view.View;
 
 
 public class MainActivity extends Activity {
+    private int highScore=0;
+    private SQLiteDatabase db;
+    private DBOpenHelper dbOpenHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,8 +27,61 @@ public class MainActivity extends Activity {
         ActionBar actionBar = getActionBar();
         if(actionBar != null)
             actionBar.hide();
+
+        dbOpenHelper = new DBOpenHelper(this, "My_Database", 3);
+        db = dbOpenHelper.getWritableDatabase();
+
+//insert into database a score of 5
+
+        db.execSQL("INSERT OR REPLACE INTO SCORES VALUES (5)");
+        db.close();
+
+        dbOpenHelper = new DBOpenHelper(this, "My_Database", 3);
+
+        db = dbOpenHelper.getReadableDatabase();
+        Cursor c = db.rawQuery("SELECT * FROM SCORES", null); //this iterates across the db
+
+        //check for updated high score
+        for(int i=0; i< c.getCount(); i++)
+        {
+            c.moveToNext();
+            if(c.getInt(0)>highScore)
+                highScore = c.getInt(0);
+        }
+
+        db.close();
     }
 
+//begin database code
+    private static class DBOpenHelper extends SQLiteOpenHelper
+    {
+        public DBOpenHelper(Context context, String dbName, int version )
+        {
+            // third argument id to a cursor factory -- we don't care about
+            super(context, dbName, null, version);
+        }
+
+        @Override
+        public void onCreate(SQLiteDatabase db)
+        {
+            try
+            {
+                db.execSQL("CREATE TABLE IF NOT EXISTS SCORES(HIGHSCORE INTEGER PRIMARY KEY)");
+            }
+            catch(SQLException e)
+            {
+                Log.e("SqliteAndroid", "DBOpenHelper", e);
+            }
+        }
+
+        @Override
+        public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion)
+        {
+            db.execSQL("DROP TABLE IF EXISTS SCORES");
+            this.onCreate(db);
+        }
+    }
+    //end database code
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
