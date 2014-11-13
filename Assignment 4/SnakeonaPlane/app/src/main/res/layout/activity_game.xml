@@ -73,4 +73,16 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
 
+    <FrameLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@+id/game_livesText"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_above="@+id/game_leftButton"
+        android:id="@+id/game_gameFrame">
+
+
+        </FrameLayout>
+
 </RelativeLayout>
