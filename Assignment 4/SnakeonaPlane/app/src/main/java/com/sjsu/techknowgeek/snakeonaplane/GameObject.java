@@ -26,5 +26,20 @@ public class GameObject {
         y = initY;
     }
 
-    //public update
+    public void move() {
+        switch (direction) {
+            case 1:
+                x++;
+            case 2:
+                y++;
+            case 3:
+                x--;
+            case 4:
+                y--;
+            default:
+                break;
+        }
+    }
+
+    
 }
