@@ -38,6 +38,7 @@
         android:layout_alignBottom="@+id/fullscreen_content"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="75dp"
-        android:longClickable="true" />
+        android:longClickable="true"
+        android:onClick="startGame" />
 
 </RelativeLayout>
