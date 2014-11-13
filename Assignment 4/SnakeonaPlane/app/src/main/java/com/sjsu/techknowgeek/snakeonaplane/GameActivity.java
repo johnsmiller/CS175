@@ -1,5 +1,6 @@
 package com.sjsu.techknowgeek.snakeonaplane;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -13,7 +14,9 @@ public class GameActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
-        getActionBar().hide();
+        ActionBar actionBar = getActionBar();
+        if(actionBar != null)
+            actionBar.hide();
     }
 
 
