@@ -29,13 +29,13 @@ public class GameObject {
     public void move() {
         switch (direction) {
             case 1:
-                x++;
+                x += speed;
             case 2:
-                y++;
+                y += speed;
             case 3:
-                x--;
+                x -= speed;
             case 4:
-                y--;
+                y -= speed;
             default:
                 break;
         }
@@ -62,5 +62,7 @@ public class GameObject {
                 direction++;
         }
     }
-    
+
+
+
 }
