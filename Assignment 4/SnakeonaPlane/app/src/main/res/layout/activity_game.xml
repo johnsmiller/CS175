@@ -81,13 +81,10 @@
         android:layout_alignParentStart="true"
         android:layout_above="@+id/game_leftButton"
         android:id="@+id/game_gameFrame">
-
-
-        <SurfaceView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/surfaceView"
-            android:layout_gravity="center" />
+        <android.opengl.GLSurfaceView
+            android:id="@+id/graphics_glsurfaceview1"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" />
     </FrameLayout>
 
 </RelativeLayout>

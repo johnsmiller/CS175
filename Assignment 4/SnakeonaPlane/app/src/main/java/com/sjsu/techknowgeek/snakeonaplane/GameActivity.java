@@ -9,18 +9,23 @@ import android.opengl.GLSurfaceView;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.SurfaceView;
+import android.widget.FrameLayout;
 
 
 public class GameActivity extends Activity {
 
     private GLSurfaceView mGLSurfaceView;
+    private FrameLayout gameFrameView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
-        mGLSurfaceView = new GLSurfaceView(this);
+        gameFrameView = (FrameLayout)findViewById(R.id.game_gameFrame);
+
+        mGLSurfaceView = (GLSurfaceView) findViewById(R.id.graphics_glsurfaceview1);
 
         // Check if the system supports OpenGL ES 2.0.
         final ActivityManager activityManager =
@@ -44,7 +49,6 @@ public class GameActivity extends Activity {
             return;
         }
 
-        setContentView(mGLSurfaceView);
         ActionBar actionBar = getActionBar();
         if(actionBar != null)
             actionBar.hide();
@@ -77,7 +81,7 @@ public class GameActivity extends Activity {
     protected void onResume()
     {
         // The activity must call the GL surface view's onResume() on activity onResume().
-        //super.onResume();
+        super.onResume();
         mGLSurfaceView.onResume();
     }
 
