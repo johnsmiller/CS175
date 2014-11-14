@@ -10,13 +10,13 @@ public class GameObject {
         //2 = NORTH
         //3 = EAST
         //4 = SOUTH
-        int direction;
+        private int direction;
     //speed
         //increment by 1
-        int speed;
+        private int speed;
     //location
-        int x;
-        int y;
+        private int x;
+        private int y;
 
     public GameObject(int initDir, int initSpd, int initX, int initY)
     {
@@ -26,6 +26,9 @@ public class GameObject {
         y = initY;
     }
 
+    /**
+     * move *speed* units in current direction
+     */
     public void move() {
         switch (direction) {
             case 1:
@@ -41,6 +44,9 @@ public class GameObject {
         }
     }
 
+    /**
+     * rotate direction of travel 90 degrees clockwise
+     */
     public void rotateRight() {
         switch (direction) {
             case 0:
@@ -52,6 +58,9 @@ public class GameObject {
         }
     }
 
+    /**
+     * rotate direction of travel 90 degrees counter-clockwise
+     */
     public void rotateLeft() {
         switch (direction) {
             case 0:
@@ -63,16 +72,35 @@ public class GameObject {
         }
     }
 
+    /**
+     * increase speed by 1 unit
+     */
     public void increaseSpeed() {
         speed++;
     }
 
+    /**
+     * decrease speed by 1 unit
+     */
     public void decreaseSpeed() {
         speed--;
     }
 
+    /**
+     * reset speed to 1
+     */
     public void resetSpeed() {
-        speed = 0;
+        speed = 1;
+    }
+
+    /**
+     * Check if current object and given object currently occupy the same space
+     * @param obj object to compare location with
+     * @return true if collision has occured
+     */
+    public boolean isCollision(GameObject obj)
+    {
+        return (x == obj.x && y == obj.y);
     }
 
 }
