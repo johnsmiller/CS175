@@ -63,6 +63,16 @@ public class GameObject {
         }
     }
 
+    public void increaseSpeed() {
+        speed++;
+    }
 
+    public void decreaseSpeed() {
+        speed--;
+    }
+
+    public void resetSpeed() {
+        speed = 0;
+    }
 
 }
