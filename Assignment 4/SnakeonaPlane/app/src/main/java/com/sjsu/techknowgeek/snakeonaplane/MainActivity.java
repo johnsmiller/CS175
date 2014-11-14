@@ -12,12 +12,14 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
 
 public class MainActivity extends Activity {
-    private int highScore=0;
+    private int currentHighScore=0;
     private SQLiteDatabase db;
     private DBOpenHelper dbOpenHelper;
+    public TextView highScore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +29,7 @@ public class MainActivity extends Activity {
         ActionBar actionBar = getActionBar();
         if(actionBar != null)
             actionBar.hide();
-
+        highScore = (TextView) this.findViewById(R.id.main_highScoreValue);
         dbOpenHelper = new DBOpenHelper(this, "My_Database", 3);
         db = dbOpenHelper.getWritableDatabase();
 
@@ -45,10 +47,11 @@ public class MainActivity extends Activity {
         for(int i=0; i< c.getCount(); i++)
         {
             c.moveToNext();
-            if(c.getInt(0)>highScore)
-                highScore = c.getInt(0);
+            if(c.getInt(0)>currentHighScore)
+                currentHighScore = c.getInt(0);
         }
-
+        
+        highScore.setText(" " + currentHighScore);
         db.close();
     }
 
