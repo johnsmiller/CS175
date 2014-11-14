@@ -10,13 +10,13 @@ public class GameObject {
         //2 = NORTH
         //3 = EAST
         //4 = SOUTH
-        int direction;
+        private int direction;
     //speed
         //increment by 1
-        int speed;
+        private int speed;
     //location
-        int x;
-        int y;
+        private int x;
+        private int y;
 
     public GameObject(int initDir, int initSpd, int initX, int initY)
     {
@@ -73,6 +73,11 @@ public class GameObject {
 
     public void resetSpeed() {
         speed = 0;
+    }
+
+    public boolean isCollision(GameObject obj)
+    {
+        return (x == obj.x && y == obj.y);
     }
 
 }
