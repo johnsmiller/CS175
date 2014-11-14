@@ -41,5 +41,26 @@ public class GameObject {
         }
     }
 
+    public void rotateRight() {
+        switch (direction) {
+            case 0:
+                break;
+            case 1:
+                direction = 4;
+            default:
+                direction--;
+        }
+    }
+
+    public void rotateLeft() {
+        switch (direction) {
+            case 0:
+                break;
+            case 4:
+                direction = 1;
+            default:
+                direction++;
+        }
+    }
     
 }
