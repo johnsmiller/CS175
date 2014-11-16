@@ -18,6 +18,13 @@ public class GameObject {
         private int x;
         private int y;
 
+    /**
+     *
+     * @param initDir
+     * @param initSpd
+     * @param initX
+     * @param initY
+     */
     public GameObject(int initDir, int initSpd, int initX, int initY)
     {
         direction = initDir;
@@ -103,4 +110,19 @@ public class GameObject {
         return (x == obj.x && y == obj.y);
     }
 
+    public int getDirection() {
+        return direction;
+    }
+
+    public int getSpeed() {
+        return speed;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
 }
