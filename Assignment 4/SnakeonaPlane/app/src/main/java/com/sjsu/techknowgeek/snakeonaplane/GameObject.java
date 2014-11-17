@@ -108,6 +108,11 @@ public class GameObject {
         speed = 1;
     }
 
+    public void resetDirection()
+    {
+        direction = 1;
+    }
+
     /**
      * Check if current object and given object currently occupy the same space
      * @param obj object to compare location with
