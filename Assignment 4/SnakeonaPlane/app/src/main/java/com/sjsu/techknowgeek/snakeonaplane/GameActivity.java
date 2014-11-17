@@ -22,7 +22,7 @@ public class GameActivity extends Activity {
     private GLSurfaceView mGLSurfaceView;
     private FrameLayout gameFrameView;
 
-    public static ArrayList<GameObject> objects;
+    public static ArrayList<GameObject> objects; //Very first object assumed to be snake
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
