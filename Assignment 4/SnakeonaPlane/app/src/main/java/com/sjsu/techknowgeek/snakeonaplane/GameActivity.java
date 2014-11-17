@@ -119,16 +119,16 @@ public class GameActivity extends Activity {
         objects = new ArrayList<GameObject>();
 
         //Snake object always starts from center of left-hand wall, moving right
-        objects.add(new GameObject(1, 1, 0, halfPoint));
+        objects.add(new GameObject(1, 1, 0, halfPoint, 0));
 
         //perimeter walls, 4 less due to corner overlap and 2 less due to entry/exit points
         for(int i = 0; i < GRID_SIZE; i++)
         {
-            objects.add(new GameObject(0,0,i,0));
-            objects.add(new GameObject(0,0,i,GRID_SIZE-1));
+            objects.add(new GameObject(0,0,i,0, 2));
+            objects.add(new GameObject(0,0,i,GRID_SIZE-1, 2));
             if(i != halfPoint && i != 0 && i != GRID_SIZE-1){ //Entry/exit & prevent overlapping corners
-                objects.add(new GameObject(0,0,0,i));
-                objects.add(new GameObject(0,0,GRID_SIZE-1, i));
+                objects.add(new GameObject(0,0,0,i, 2));
+                objects.add(new GameObject(0,0,GRID_SIZE-1, i, 2));
             }
         }
 
@@ -138,27 +138,27 @@ public class GameActivity extends Activity {
         switch (level)
         {
             default: //0 or level given was negative
-                objects.add(new GameObject(0,0,(GRID_SIZE-1)/2,(GRID_SIZE/2)-2));
-                objects.add(new GameObject(0,0,(GRID_SIZE-1)/2,(GRID_SIZE-1)/2));
-                objects.add(new GameObject(0,0,(GRID_SIZE-1)/2,(GRID_SIZE/2)));
-                objects.add(new GameObject(0,0,(GRID_SIZE-1)/2,(GRID_SIZE/2)+1));
+                objects.add(new GameObject(0,0,(GRID_SIZE-1)/2,(GRID_SIZE/2)-2, 2));
+                objects.add(new GameObject(0,0,(GRID_SIZE-1)/2,(GRID_SIZE-1)/2, 2));
+                objects.add(new GameObject(0,0,(GRID_SIZE-1)/2,(GRID_SIZE/2), 2));
+                objects.add(new GameObject(0,0,(GRID_SIZE-1)/2,(GRID_SIZE/2)+1, 2));
                 break;
             case 1:
                 for(int i = 2; i<GRID_SIZE-1; i++)
                 {
-                    objects.add(new GameObject(0,0,((GRID_SIZE-1)/2),i));
+                    objects.add(new GameObject(0,0,((GRID_SIZE-1)/2),i, 2));
                 }
                 break;
             case 2:
                 for(int i = 1; i<GRID_SIZE-1; i++)
                 {
                     if(i != halfPoint)
-                        objects.add(new GameObject(0,0,3*((GRID_SIZE-1)/4),i));
+                        objects.add(new GameObject(0,0,3*((GRID_SIZE-1)/4),i, 2));
                 }
-                objects.add(new GameObject(0,0,((GRID_SIZE-1)/4),(GRID_SIZE-2)/2));
-                objects.add(new GameObject(0,0,((GRID_SIZE-1)/4),(GRID_SIZE-1)/2));
-                objects.add(new GameObject(0,0,((GRID_SIZE-1)/4),(GRID_SIZE/2)));
-                objects.add(new GameObject(0,0,((GRID_SIZE-1)/4),(GRID_SIZE+1)/2));
+                objects.add(new GameObject(0,0,((GRID_SIZE-1)/4),(GRID_SIZE-2)/2, 2));
+                objects.add(new GameObject(0,0,((GRID_SIZE-1)/4),(GRID_SIZE-1)/2, 2));
+                objects.add(new GameObject(0,0,((GRID_SIZE-1)/4),(GRID_SIZE/2), 2));
+                objects.add(new GameObject(0,0,((GRID_SIZE-1)/4),(GRID_SIZE+1)/2, 2));
                 break;
         }
 
@@ -228,6 +228,8 @@ public class GameActivity extends Activity {
         Iterator<GameObject> itr = objects.iterator();
         GameObject snake = itr.next();
 
+        objects.add(new GameObject(0,0,snake.getX(), snake.getY(), 1));
+
         snake.move();
 
         int halfPoint = (GRID_SIZE-1)/2;
@@ -247,9 +249,7 @@ public class GameActivity extends Activity {
                     if(lives>0) {
                         lives--;
                         updateValues();
-                        snake.setX(0);
-                        snake.setY(halfPoint);
-                        snake.resetDirection();
+                        initializeObjectArray();
                     }
                     else {
                         MainActivity.updateHighScore(score);
