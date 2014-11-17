@@ -17,6 +17,9 @@ public class GameObject {
     //location
         private int x;
         private int y;
+        
+    //type
+        private objectType type;
 
     /**
      *
@@ -24,13 +27,26 @@ public class GameObject {
      * @param initSpd
      * @param initX
      * @param initY
+     * @param objType 0 for snake head, 1 for tail, 2 for wall
      */
-    public GameObject(int initDir, int initSpd, int initX, int initY)
+    public GameObject(int initDir, int initSpd, int initX, int initY, int objType)
     {
         direction = initDir;
         speed = initSpd;
         x = initX;
         y = initY;
+        
+        switch(objType) {
+            case 0: 
+                type = objectType.head;
+                break;
+            case 1: 
+                type = objectType.tail;
+                break;
+            default: 
+                type = objectType.wall;
+                break;
+        }
     }
 
     /**
@@ -145,5 +161,13 @@ public class GameObject {
 
     public void setY(int y) {
         this.y = y;
+    }
+    
+    public objectType getType() {
+        return type;
+    }
+    
+    public enum objectType{
+        head, tail, wall;
     }
 }
