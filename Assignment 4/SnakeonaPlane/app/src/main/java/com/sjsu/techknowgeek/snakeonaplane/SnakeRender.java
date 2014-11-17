@@ -93,16 +93,16 @@ public class SnakeRender implements GLSurfaceView.Renderer {
         final float[] snake = {
                 // X, Y, Z,
                 // R, G, B, A
-                0.0f, -0.5f, 0.0f,
+                0.0f, 0.5f, 0.0f,
                 0.0f, 1.0f, 0.0f, 1.0f,
 
                 0.5f, 0.0f, 0.0f,
                 0.0f, 1.0f, 0.0f, 1.0f,
 
-                0.5f, 0.5f, 0.0f,
+                0.5f, -0.5f, 0.0f,
                 0.0f, 1.0f, 0.0f, 1.0f,
 
-                -0.5f, 0.5f, 0.0f,
+                -0.5f, -0.5f, 0.0f,
                 0.0f, 1.0f, 0.0f, 1.0f,
 
                 -0.5f, 0.0f, 0.0f,
@@ -358,6 +358,7 @@ public class SnakeRender implements GLSurfaceView.Renderer {
                 drawGameObject(mWallVertices, 4);
             } else {// its a snake
                 // Insert rotation for head of snake
+                Matrix.rotateM(mModelMatrix, 0, (anObj.getDirection()-1)*90.0f, 0.0f, 0.0f, 1.0f);
                 drawGameObject(mSnakeVertices, 5);
             }
         }

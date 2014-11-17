@@ -60,8 +60,10 @@ public class GameObject {
                 break;
             case 1:
                 direction = 4;
+                break;
             default:
                 direction--;
+                break;
         }
     }
 
@@ -74,8 +76,10 @@ public class GameObject {
                 break;
             case 4:
                 direction = 1;
+                break;
             default:
                 direction++;
+                break;
         }
     }
 
