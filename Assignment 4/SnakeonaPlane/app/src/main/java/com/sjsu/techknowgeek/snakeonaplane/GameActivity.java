@@ -12,6 +12,9 @@ import android.view.MenuItem;
 import android.view.SurfaceView;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -34,6 +37,10 @@ public class GameActivity extends Activity {
     public static int score;
     public static ArrayList<GameObject> objects; //Very first object assumed to be snake
 
+    private TextView livesValue;
+    private TextView scoreValue;
+    private TextView levelTextView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +53,11 @@ public class GameActivity extends Activity {
         timer = new Timer();
 
         score = 0;
-        initializeObjectArray(level);
+        initializeObjectArray();
+
+        livesValue = (TextView) findViewById(R.id.game_livesValue);
+        scoreValue = (TextView) findViewById(R.id.game_scoreValue);
+        levelTextView = (TextView) findViewById(R.id.game_levelStr);
 
         gameFrameView = (FrameLayout)findViewById(R.id.game_gameFrame);
 
@@ -78,14 +89,14 @@ public class GameActivity extends Activity {
         if(actionBar != null)
             actionBar.hide();
 
+        updateValues();
         startTimer();
     }
 
     /**
      * Initializes the objects Array list
-     * @param level valid range of 0 through 2
      */
-    private void initializeObjectArray(int level)
+    private void initializeObjectArray()
     {
         int halfPoint = (GRID_SIZE-1)/2;
 
@@ -207,12 +218,11 @@ public class GameActivity extends Activity {
 
         if(snake.getX() >= GRID_SIZE-1 && snake.getY() == halfPoint) //Level Complete
         {
-            //TODO: Next level
-                //Increase Speed
-                //Increase Score
-                //Update Score on screen
-                //Next Level
-            return;
+            speed -= speed/4;
+            score++;
+            level++;
+            updateValues();
+            initializeObjectArray();
         }
 
         else { //Check for Collision
@@ -220,7 +230,7 @@ public class GameActivity extends Activity {
                 if (snake.isCollision(itr.next())) {
                     if(lives>0) {
                         lives--;
-                        //TODO: Update lives on screen
+                        updateValues();
                         snake.setX(0);
                         snake.setY(halfPoint);
                     }
@@ -229,12 +239,20 @@ public class GameActivity extends Activity {
                         //IF SCORE > HIGH SCORE
                         //STORE HIGH SCORE
                         //DISPLAY GAME OVER SCREEN
+                        this.finish();
                         return;
                     }
                 }
             }
         }
         startTimer();
+    }
+
+    private void updateValues()
+    {
+        scoreValue.setText(score+"");
+        livesValue.setText(lives+"");
+        levelTextView.setText("Level: "+level);
     }
 
     public void turnLeft(View view)
