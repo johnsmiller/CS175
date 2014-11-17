@@ -23,11 +23,14 @@ public class GameActivity extends Activity {
 
     private GLSurfaceView mGLSurfaceView;
     private FrameLayout gameFrameView;
-    private int lives;
-    private int level;
 
-    public static ArrayList<GameObject> objects; //Very first object assumed to be snake
+    private static int lives;
+    private static int level;
+    private static long speed; //number of milliseconds between updating model
+
     public static int score;
+    public static ArrayList<GameObject> objects; //Very first object assumed to be snake
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,10 +39,10 @@ public class GameActivity extends Activity {
 
         lives = 3;
         level = 0;
-        initializeObjectArray(level);
+        speed = 3000;
+
         score = 0;
-
-
+        initializeObjectArray(level);
 
         gameFrameView = (FrameLayout)findViewById(R.id.game_gameFrame);
 
@@ -190,20 +193,22 @@ public class GameActivity extends Activity {
         else { //Check for Collision
             for (; itr.hasNext(); ) {
                 if (snake.isCollision(itr.next())) {
-                    //TODO: RESTART LEVEL IF LIVES > 0
-                    //lives--;
-                    //snake to start position
-
-                    //TODO: GAME OVER ELSE
-                    //IF SCORE > HIGH SCORE
-                    //STORE HIGH SCORE
-                    //DISPLAY GAME OVER SCREEN
-                    break;
+                    if(lives>0) {
+                        lives--;
+                        snake.setX(0);
+                        snake.setY(halfPoint);
+                    }
+                    else {
+                        //TODO: GAME OVER
+                        //IF SCORE > HIGH SCORE
+                        //STORE HIGH SCORE
+                        //DISPLAY GAME OVER SCREEN
+                        break;
+                    }
                 }
             }
         }
     }
-
 
     public void turnLeft(View view)
     {

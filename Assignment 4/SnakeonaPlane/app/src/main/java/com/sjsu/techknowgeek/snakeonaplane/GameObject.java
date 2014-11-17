@@ -6,9 +6,9 @@ package com.sjsu.techknowgeek.snakeonaplane;
 public class GameObject {
     //direction
         //0 = stationary
-        //1 = WEST
+        //1 = EAST
         //2 = NORTH
-        //3 = EAST
+        //3 = WEST
         //4 = SOUTH
         private int direction;
     //speed
@@ -124,5 +124,13 @@ public class GameObject {
 
     public int getY() {
         return y;
+    }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public void setY(int y) {
+        this.y = y;
     }
 }
