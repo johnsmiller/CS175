@@ -16,10 +16,10 @@ import android.widget.TextView;
 
 
 public class MainActivity extends Activity {
-    private int currentHighScore=0;
-    private SQLiteDatabase db;
-    private DBOpenHelper dbOpenHelper;
-    public TextView highScore;
+    private static int currentHighScore=0;
+    private static SQLiteDatabase db;
+    private static DBOpenHelper dbOpenHelper;
+    public static TextView highScore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,28 +31,8 @@ public class MainActivity extends Activity {
             actionBar.hide();
         highScore = (TextView) this.findViewById(R.id.main_highScoreValue);
         dbOpenHelper = new DBOpenHelper(this, "My_Database", 3);
-        db = dbOpenHelper.getWritableDatabase();
-
-//insert into database a score of 5
-
-        db.execSQL("INSERT OR REPLACE INTO SCORES VALUES (5)");
-        db.close();
-
-        dbOpenHelper = new DBOpenHelper(this, "My_Database", 3);
-
-        db = dbOpenHelper.getReadableDatabase();
-        Cursor c = db.rawQuery("SELECT * FROM SCORES", null); //this iterates across the db
-
-        //check for updated high score
-        for(int i=0; i< c.getCount(); i++)
-        {
-            c.moveToNext();
-            if(c.getInt(0)>currentHighScore)
-                currentHighScore = c.getInt(0);
-        }
-        
-        highScore.setText(" " + currentHighScore);
-        db.close();
+        currentHighScore = 0;
+        readFromDatabase();
     }
 
 //begin database code
@@ -113,6 +93,44 @@ public class MainActivity extends Activity {
         Intent intent = new Intent(this, GameActivity.class);
         startActivity(intent);
     }
+
+    public static void updateHighScore(int n)
+    {
+        if(n > currentHighScore)
+        {
+            currentHighScore = n;
+            writeToDatabase();
+            updateView();
+        }
+    }
+
+    private static void writeToDatabase()
+    {
+        db = dbOpenHelper.getWritableDatabase();
+        db.execSQL("INSERT OR REPLACE INTO SCORES VALUES (" + currentHighScore + ")");
+        db.close();
+    }
+
+    private static void readFromDatabase()
+    {
+        db = dbOpenHelper.getReadableDatabase();
+        Cursor c = db.rawQuery("SELECT * FROM SCORES", null); //this iterates across the db
+
+        //check for updated high score
+        for(int i=0; i< c.getCount(); i++)
+        {
+            c.moveToNext();
+            if(c.getInt(0)>currentHighScore)
+                currentHighScore = c.getInt(0);
+        }
+        db.close();
+    }
+
+    private static void updateView()
+    {
+        highScore.setText(" " + currentHighScore);
+    }
+
 }
 
 
