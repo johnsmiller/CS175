@@ -233,6 +233,7 @@ public class GameActivity extends Activity {
                         updateValues();
                         snake.setX(0);
                         snake.setY(halfPoint);
+                        snake.resetDirection();
                     }
                     else {
                         //TODO: GAME OVER
