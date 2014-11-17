@@ -225,10 +225,11 @@ public class GameActivity extends Activity {
 
     private void checkSnake()
     {
-        Iterator<GameObject> itr = objects.iterator();
-        GameObject snake = itr.next();
-
+        GameObject snake = objects.get(0);
         objects.add(new GameObject(0,0,snake.getX(), snake.getY(), 1));
+
+        Iterator<GameObject> itr = objects.iterator();
+        itr.next();
 
         snake.move();
 
