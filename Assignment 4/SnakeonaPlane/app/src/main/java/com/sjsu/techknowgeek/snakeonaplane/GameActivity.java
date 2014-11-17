@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.FrameLayout;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 
 public class GameActivity extends Activity {
@@ -22,15 +23,23 @@ public class GameActivity extends Activity {
 
     private GLSurfaceView mGLSurfaceView;
     private FrameLayout gameFrameView;
+    private int lives;
+    private int level;
 
     public static ArrayList<GameObject> objects; //Very first object assumed to be snake
+    public static int score;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
-        initializeObjectArray(1);
+        lives = 3;
+        level = 0;
+        initializeObjectArray(level);
+        score = 0;
+
+
 
         gameFrameView = (FrameLayout)findViewById(R.id.game_gameFrame);
 
@@ -160,6 +169,41 @@ public class GameActivity extends Activity {
         super.onPause();
         mGLSurfaceView.onPause();
     }
+
+    public static void checkSnake()
+    {
+        Iterator<GameObject> itr = objects.iterator();
+        GameObject snake = itr.next();
+
+        snake.move();
+
+        int halfPoint = (GRID_SIZE-1)/2;
+
+        if(snake.getX() >= GRID_SIZE-1 && snake.getY() == halfPoint) //Level Complete
+        {
+            //TODO: Next level
+                //Increase Speed
+                //Increase Score
+                //Next Level
+        }
+
+        else { //Check for Collision
+            for (; itr.hasNext(); ) {
+                if (snake.isCollision(itr.next())) {
+                    //TODO: RESTART LEVEL IF LIVES > 0
+                    //lives--;
+                    //snake to start position
+
+                    //TODO: GAME OVER ELSE
+                    //IF SCORE > HIGH SCORE
+                    //STORE HIGH SCORE
+                    //DISPLAY GAME OVER SCREEN
+                    break;
+                }
+            }
+        }
+    }
+
 
     public void turnLeft(View view)
     {
