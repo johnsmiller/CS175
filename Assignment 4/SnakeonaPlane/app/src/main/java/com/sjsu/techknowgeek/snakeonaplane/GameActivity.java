@@ -253,7 +253,7 @@ public class GameActivity extends Activity {
                         //TODO: GAME OVER
                         //IF SCORE > HIGH SCORE
                         //STORE HIGH SCORE
-                        
+
                         this.finish();
                         return;
                     }
