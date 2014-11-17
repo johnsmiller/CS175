@@ -339,17 +339,25 @@ public class SnakeRender implements GLSurfaceView.Renderer {
 //        long time = SystemClock.uptimeMillis() % 10000L;
 //        float angleInDegrees = (360.0f / 10000.0f) * ((int) time);
 
-        // Draw the triangle facing straight on.
-        Matrix.setIdentityM(mModelMatrix, 0);
-        //Matrix.rotateM(mModelMatrix, 0, angleInDegrees, 0.0f, 0.0f, 1.0f);
-        drawGameObject(mSnakeVertices, 5);
-
-        // Draw one translated a bit down and rotated to be flat on the ground.
-        Matrix.setIdentityM(mModelMatrix, 0);
-        Matrix.translateM(mModelMatrix, 0, 0.0f, -1.0f, 0.0f);
-        //Matrix.rotateM(mModelMatrix, 0, 90.0f, 1.0f, 0.0f, 0.0f);
-        //Matrix.rotateM(mModelMatrix, 0, angleInDegrees, 0.0f, 0.0f, 1.0f);
-        drawGameObject(mWallVertices, 4);
+        // Draw all game objects
+        for(GameObject anObj : GameActivity.objects){
+            if (anObj.getDirection() == 0) { // its a snake
+                drawGameObject(mSnakeVertices, 5);
+            } else {// its a wall
+                drawGameObject(mWallVertices, 4);
+            }
+        }
+//        // Draw the triangle facing straight on.
+//        Matrix.setIdentityM(mModelMatrix, 0);
+//        //Matrix.rotateM(mModelMatrix, 0, angleInDegrees, 0.0f, 0.0f, 1.0f);
+//        drawGameObject(mSnakeVertices, 5);
+//
+//        // Draw one translated a bit down and rotated to be flat on the ground.
+//        Matrix.setIdentityM(mModelMatrix, 0);
+//        Matrix.translateM(mModelMatrix, 0, 0.0f, -1.0f, 0.0f);
+//        //Matrix.rotateM(mModelMatrix, 0, 90.0f, 1.0f, 0.0f, 0.0f);
+//        //Matrix.rotateM(mModelMatrix, 0, angleInDegrees, 0.0f, 0.0f, 1.0f);
+//        drawGameObject(mWallVertices, 4);
     }
 
     /**
