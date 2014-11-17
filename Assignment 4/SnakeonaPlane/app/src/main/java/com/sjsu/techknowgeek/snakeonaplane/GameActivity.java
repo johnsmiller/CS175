@@ -13,6 +13,14 @@ import android.view.SurfaceView;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
+import android.transition.AutoTransition;
+import android.transition.Scene;
+import android.transition.Transition;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.animation.AccelerateDecelerateInterpolator;
+import android.widget.RelativeLayout;
+import android.transition.TransitionManager;
 
 import org.w3c.dom.Text;
 
@@ -41,6 +49,12 @@ public class GameActivity extends Activity {
     private TextView scoreValue;
     private TextView levelTextView;
 
+    //scenes to transition
+    private Scene scene1, scene2;
+    //transition to move between scenes
+    private Transition transition;
+    //flag to swap between scenes
+    private boolean start;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -239,7 +253,7 @@ public class GameActivity extends Activity {
                         //TODO: GAME OVER
                         //IF SCORE > HIGH SCORE
                         //STORE HIGH SCORE
-                        //DISPLAY GAME OVER SCREEN
+                        
                         this.finish();
                         return;
                     }

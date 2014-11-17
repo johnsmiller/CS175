@@ -12,5 +12,6 @@
     <string name="turn_left">Turn Left</string>
     <string name="lives">Lives:</string>
     <string name="score">Score:</string>
+    <string name="title_activity_game_over">Game Over</string>
 
 </resources>
