@@ -40,12 +40,16 @@ public class GameObject {
         switch (direction) {
             case 1:
                 x += speed;
+                break;
             case 2:
                 y += speed;
+                break;
             case 3:
                 x -= speed;
+                break;
             case 4:
                 y -= speed;
+                break;
             default:
                 break;
         }

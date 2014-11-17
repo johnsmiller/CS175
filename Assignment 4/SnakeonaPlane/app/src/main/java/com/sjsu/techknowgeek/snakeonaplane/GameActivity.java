@@ -208,6 +208,7 @@ public class GameActivity extends Activity {
             //TODO: Next level
                 //Increase Speed
                 //Increase Score
+                //Update Score on screen
                 //Next Level
             return;
         }
@@ -217,6 +218,7 @@ public class GameActivity extends Activity {
                 if (snake.isCollision(itr.next())) {
                     if(lives>0) {
                         lives--;
+                        //TODO: Update lives on screen
                         snake.setX(0);
                         snake.setY(halfPoint);
                     }
