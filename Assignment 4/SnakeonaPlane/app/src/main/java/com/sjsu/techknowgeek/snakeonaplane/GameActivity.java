@@ -4,6 +4,7 @@ import android.app.ActionBar;
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.ConfigurationInfo;
 import android.opengl.GLSurfaceView;
 import android.opengl.Matrix;
@@ -253,6 +254,9 @@ public class GameActivity extends Activity {
                     else {
                         MainActivity.updateHighScore(score);
                         //John put your f%#$#ing intent here.
+                        //AL-F%$%ing right! You &^%&ing happy now??
+                        Intent intent = new Intent(this, GameOverActivity.class);
+                        startActivity(intent);
                         this.finish();
                         return;
                     }

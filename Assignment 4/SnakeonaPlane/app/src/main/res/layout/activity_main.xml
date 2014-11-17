@@ -25,7 +25,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="00000"
+        android:text="@string/double_zero"
         android:id="@+id/main_highScoreValue"
         android:layout_alignTop="@+id/main_highScoreText"
         android:layout_centerHorizontal="true" />
