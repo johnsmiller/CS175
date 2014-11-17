@@ -17,12 +17,12 @@ import java.util.ArrayList;
 
 public class GameActivity extends Activity {
 
-    public static final int GRID_SIZE = 16; //Length of each grid size, assumed > 8
+    public static final int GRID_SIZE = 16; //Length of each grid side, assumed > 8
 
     private GLSurfaceView mGLSurfaceView;
     private FrameLayout gameFrameView;
 
-    private ArrayList<GameObject> objects;
+    public static ArrayList<GameObject> objects;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
