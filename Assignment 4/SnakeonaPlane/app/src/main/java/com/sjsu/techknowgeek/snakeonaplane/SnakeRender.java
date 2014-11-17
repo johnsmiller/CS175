@@ -161,7 +161,7 @@ public class SnakeRender implements GLSurfaceView.Renderer {
         // Position the eye behind the origin.
         final float eyeX = 0.0f;
         final float eyeY = 0.0f;
-        final float eyeZ = 10.0f;
+        final float eyeZ = 1.5f;
 
         // We are looking toward the distance
         final float lookX = 0.0f;
@@ -341,23 +341,18 @@ public class SnakeRender implements GLSurfaceView.Renderer {
 
         // Draw all game objects
         for(GameObject anObj : GameActivity.objects){
+            Matrix.setIdentityM(mModelMatrix, 0);
+            // Insert transformations for position
+            
+
+
             if (anObj.getDirection() == 0) { // its a snake
+               // Insert transformations for position
                 drawGameObject(mSnakeVertices, 5);
             } else {// its a wall
                 drawGameObject(mWallVertices, 4);
             }
         }
-//        // Draw the triangle facing straight on.
-//        Matrix.setIdentityM(mModelMatrix, 0);
-//        //Matrix.rotateM(mModelMatrix, 0, angleInDegrees, 0.0f, 0.0f, 1.0f);
-//        drawGameObject(mSnakeVertices, 5);
-//
-//        // Draw one translated a bit down and rotated to be flat on the ground.
-//        Matrix.setIdentityM(mModelMatrix, 0);
-//        Matrix.translateM(mModelMatrix, 0, 0.0f, -1.0f, 0.0f);
-//        //Matrix.rotateM(mModelMatrix, 0, 90.0f, 1.0f, 0.0f, 0.0f);
-//        //Matrix.rotateM(mModelMatrix, 0, angleInDegrees, 0.0f, 0.0f, 1.0f);
-//        drawGameObject(mWallVertices, 4);
     }
 
     /**
