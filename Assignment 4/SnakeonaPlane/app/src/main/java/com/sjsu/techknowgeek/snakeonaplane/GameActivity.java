@@ -77,6 +77,8 @@ public class GameActivity extends Activity {
         ActionBar actionBar = getActionBar();
         if(actionBar != null)
             actionBar.hide();
+
+        startTimer();
     }
 
     /**
