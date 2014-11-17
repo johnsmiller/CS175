@@ -6,6 +6,7 @@ import android.app.ActivityManager;
 import android.content.Context;
 import android.content.pm.ConfigurationInfo;
 import android.opengl.GLSurfaceView;
+import android.opengl.Matrix;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -250,10 +251,8 @@ public class GameActivity extends Activity {
                         snake.resetDirection();
                     }
                     else {
-                        //TODO: GAME OVER
-                        //IF SCORE > HIGH SCORE
-                        //STORE HIGH SCORE
-
+                        MainActivity.updateHighScore(score);
+                        //John put your f%#$#ing intent here.
                         this.finish();
                         return;
                     }
@@ -267,7 +266,7 @@ public class GameActivity extends Activity {
     {
         scoreValue.setText(score+"");
         livesValue.setText(lives+"");
-        levelTextView.setText("Level: "+level);
+        levelTextView.setText("Level: " + level);
     }
 
     public void turnLeft(View view)
