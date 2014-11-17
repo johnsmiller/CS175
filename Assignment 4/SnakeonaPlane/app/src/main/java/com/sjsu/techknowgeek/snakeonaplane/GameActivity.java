@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.SurfaceView;
+import android.view.View;
 import android.widget.FrameLayout;
 
 import java.util.ArrayList;
@@ -158,5 +159,15 @@ public class GameActivity extends Activity {
         // The activity must call the GL surface view's onPause() on activity onPause().
         super.onPause();
         mGLSurfaceView.onPause();
+    }
+
+    public void turnLeft(View view)
+    {
+        objects.get(0).rotateLeft();
+    }
+
+    public void turnRight(View view)
+    {
+        objects.get(0).rotateRight();
     }
 }
