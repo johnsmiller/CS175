@@ -1,5 +1,6 @@
 package com.sjsu.techknowgeek.snakeonaplane;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -15,6 +16,10 @@ public class GameOverActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_over);
+
+        ActionBar actionBar = getActionBar();
+        if(actionBar != null)
+            actionBar.hide();
 
         TimerTask task = new TimerTask() {
             /**
