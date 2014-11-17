@@ -20,6 +20,70 @@ import android.os.SystemClock;
 public class SnakeRender implements GLSurfaceView.Renderer {
     final float GRID_UNIT = 2.0f / GameActivity.GRID_SIZE;
 
+    /** Graphical Models for the Snake Game **/
+    final int snakeVxLen = 5;
+    final float[] snake = {
+            // X, Y, Z,
+            // R, G, B, A
+            0.0f, 0.5f, 0.0f,
+            0.0f, 1.0f, 0.0f, 1.0f,
+
+            0.5f, 0.0f, 0.0f,
+            0.0f, 1.0f, 0.0f, 1.0f,
+
+            0.5f,-0.5f, 0.0f,
+            0.0f, 1.0f, 0.0f, 1.0f,
+
+            -0.5f,-0.5f, 0.0f,
+            0.0f, 1.0f, 0.0f, 1.0f,
+
+            -0.5f, 0.0f, 0.0f,
+            0.0f, 1.0f, 0.0f, 1.0f,
+    };
+
+    final int tailVxLen = 4;
+    final float[] tail = {
+            // X, Y, Z,
+            // R, G, B, A
+            0.25f, 0.25f, 0.0f,
+            0.0f,  1.0f, 0.0f, 1.0f,
+
+            0.25f,-0.25f, 0.0f,
+            0.0f,  1.0f, 0.0f, 1.0f,
+
+            -0.25f,-0.25f, 0.0f,
+            0.0f,  1.0f, 0.0f, 1.0f,
+
+            -0.25f, 0.25f, 0.0f,
+            0.0f,  1.0f, 0.0f, 1.0f,
+    };
+
+    final int wallVxLen = 7;
+    final float[] wall = {
+            // X, Y, Z,
+            // R, G, B, A
+            0.5f, 0.5f, 0.0f,
+            0.5f, 0.5f, 0.5f, 1.0f,
+
+            0.5f,-0.5f, 0.0f,
+            0.5f, 0.5f, 0.5f, 1.0f,
+
+            -0.5f,-0.5f, 0.0f,
+            0.5f, 0.5f, 0.5f, 1.0f,
+
+            -0.5f, 0.5f, 0.0f,
+            0.5f, 0.5f, 0.5f, 1.0f,
+
+            0.0f, 0.5f, 0.0f,
+            0.5f, 0.5f, 0.5f, 1.0f,
+
+            0.5f, 0.0f, 0.0f,
+            0.5f, 0.5f, 0.5f, 1.0f,
+
+            -0.5f, 0.0f, 0.0f,
+            0.5f, 0.5f, 0.5f, 1.0f,
+    };
+    
     /**
      * Store the model matrix. This matrix is used to move models
      * from object space (where each model can be thought
@@ -47,6 +111,7 @@ public class SnakeRender implements GLSurfaceView.Renderer {
     /** Store our model data in a float buffer. */
     private final FloatBuffer mSnakeVertices;
     private final FloatBuffer mWallVertices;
+    private final FloatBuffer mTailVertices;
 
 
     /** This will be used to pass in the transformation matrix. */
@@ -87,70 +152,6 @@ public class SnakeRender implements GLSurfaceView.Renderer {
      */
     public SnakeRender()
     {
-        // Define points for equilateral triangles.
-
-        // This triangle is red, green, and blue.
-        final float[] snake = {
-                // X, Y, Z,
-                // R, G, B, A
-                0.0f, 0.5f, 0.0f,
-                0.0f, 1.0f, 0.0f, 1.0f,
-
-                0.5f, 0.0f, 0.0f,
-                0.0f, 1.0f, 0.0f, 1.0f,
-
-                0.5f,-0.5f, 0.0f,
-                0.0f, 1.0f, 0.0f, 1.0f,
-
-               -0.5f,-0.5f, 0.0f,
-                0.0f, 1.0f, 0.0f, 1.0f,
-
-               -0.5f, 0.0f, 0.0f,
-                0.0f, 1.0f, 0.0f, 1.0f,
-        };
-
-        final float[] tail = {
-                // X, Y, Z,
-                // R, G, B, A
-                0.25f, 0.25f, 0.0f,
-                 0.0f,  1.0f, 0.0f, 1.0f,
-
-                0.25f,-0.25f, 0.0f,
-                 0.0f,  1.0f, 0.0f, 1.0f,
-
-               -0.25f,-0.25f, 0.0f,
-                 0.0f,  1.0f, 0.0f, 1.0f,
-
-               -0.25f, 0.25f, 0.0f,
-                 0.0f,  1.0f, 0.0f, 1.0f,
-        };
-
-        // This triangle is yellow, cyan, and magenta.
-        final float[] wall = {
-                // X, Y, Z,
-                // R, G, B, A
-                0.5f, 0.5f, 0.0f,
-                0.5f, 0.5f, 0.5f, 1.0f,
-
-                0.5f,-0.5f, 0.0f,
-                0.5f, 0.5f, 0.5f, 1.0f,
-
-               -0.5f,-0.5f, 0.0f,
-                0.5f, 0.5f, 0.5f, 1.0f,
-
-               -0.5f, 0.5f, 0.0f,
-                0.5f, 0.5f, 0.5f, 1.0f,
-
-                0.0f, 0.5f, 0.0f,
-                0.5f, 0.5f, 0.5f, 1.0f,
-
-                0.5f, 0.0f, 0.0f,
-                0.5f, 0.5f, 0.5f, 1.0f,
-
-               -0.5f, 0.0f, 0.0f,
-                0.5f, 0.5f, 0.5f, 1.0f,
-        };
-
         // Initialize the buffers.
         mSnakeVertices = ByteBuffer.allocateDirect(
                 snake.length * mBytesPerFloat)
@@ -158,9 +159,13 @@ public class SnakeRender implements GLSurfaceView.Renderer {
         mWallVertices = ByteBuffer.allocateDirect(
                 wall.length * mBytesPerFloat)
                 .order(ByteOrder.nativeOrder()).asFloatBuffer();
+        mTailVertices = ByteBuffer.allocateDirect(
+                tail.length * mBytesPerFloat)
+                .order(ByteOrder.nativeOrder()).asFloatBuffer();
 
         mSnakeVertices.put(snake).position(0);
         mWallVertices.put(wall).position(0);
+        mTailVertices.put(tail).position(0);
     }
 
     @Override
@@ -346,10 +351,6 @@ public class SnakeRender implements GLSurfaceView.Renderer {
     {
         GLES20.glClear(GLES20.GL_DEPTH_BUFFER_BIT | GLES20.GL_COLOR_BUFFER_BIT);
 
-//        // Do a complete rotation every 10 seconds.
-//        long time = SystemClock.uptimeMillis() % 10000L;
-//        float angleInDegrees = (360.0f / 10000.0f) * ((int) time);
-
         // Draw all game objects
         for(GameObject anObj : GameActivity.objects){
             Matrix.setIdentityM(mModelMatrix, 0);
@@ -363,12 +364,22 @@ public class SnakeRender implements GLSurfaceView.Renderer {
             Matrix.translateM(mModelMatrix, 0, x, y, 0.0f);
             Matrix.scaleM(mModelMatrix, 0, GRID_UNIT, GRID_UNIT, 0.0f);
 
-            if (anObj.getDirection() == 0) {// its a wall
-                drawGameObject(mWallVertices, 7);
-            } else {// its a snake
-                // Insert rotation for head of snake
-                Matrix.rotateM(mModelMatrix, 0, (anObj.getDirection()*90.0f)-180.0f, 0.0f, 0.0f, 1.0f);
-                drawGameObject(mSnakeVertices, 5);
+            switch (anObj.getType()){
+                case wall:
+                    drawGameObject(mWallVertices, wallVxLen);
+                    break;
+                case head:
+                    // Insert rotation for head of snake
+                    Matrix.rotateM(mModelMatrix, 0, (anObj.getDirection()*90.0f)-180.0f, 0.0f, 0.0f, 1.0f);
+                    drawGameObject(mSnakeVertices, snakeVxLen);
+                    break;
+                case tail:
+                    drawGameObject(mTailVertices, tailVxLen);
+                    break;
+                default:
+                    // Wasn't sure so draw as wall.
+                    drawGameObject(mWallVertices, wallVxLen);
+                    System.err.println("Not recongized game obj type");
             }
         }
     }
