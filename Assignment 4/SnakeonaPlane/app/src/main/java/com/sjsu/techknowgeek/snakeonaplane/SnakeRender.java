@@ -360,14 +360,14 @@ public class SnakeRender implements GLSurfaceView.Renderer {
             x+= anObj.getX()*GRID_UNIT;
             y+= anObj.getY()*GRID_UNIT;
 
-            Matrix.translateM(mModelMatrix, 0, x, -y, 0.0f);
+            Matrix.translateM(mModelMatrix, 0, x, y, 0.0f);
             Matrix.scaleM(mModelMatrix, 0, GRID_UNIT, GRID_UNIT, 0.0f);
 
             if (anObj.getDirection() == 0) {// its a wall
-                drawGameObject(mWallVertices, 4);
+                drawGameObject(mWallVertices, 7);
             } else {// its a snake
                 // Insert rotation for head of snake
-                Matrix.rotateM(mModelMatrix, 0, (anObj.getDirection()-1)*90.0f, 0.0f, 0.0f, 1.0f);
+                Matrix.rotateM(mModelMatrix, 0, (anObj.getDirection()*90.0f)-180.0f, 0.0f, 0.0f, 1.0f);
                 drawGameObject(mSnakeVertices, 5);
             }
         }
