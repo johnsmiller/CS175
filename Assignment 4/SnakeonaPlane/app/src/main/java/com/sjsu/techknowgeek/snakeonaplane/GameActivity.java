@@ -15,6 +15,8 @@ import android.widget.FrameLayout;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.Timer;
+import java.util.TimerTask;
 
 
 public class GameActivity extends Activity {
@@ -27,6 +29,7 @@ public class GameActivity extends Activity {
     private static int lives;
     private static int level;
     private static long speed; //number of milliseconds between updating model
+    private static Timer timer;
 
     public static int score;
     public static ArrayList<GameObject> objects; //Very first object assumed to be snake
@@ -40,6 +43,7 @@ public class GameActivity extends Activity {
         lives = 3;
         level = 0;
         speed = 3000;
+        timer = new Timer();
 
         score = 0;
         initializeObjectArray(level);
@@ -82,14 +86,11 @@ public class GameActivity extends Activity {
     private void initializeObjectArray(int level)
     {
         int halfPoint = (GRID_SIZE-1)/2;
-        int snakeSpeed = 1;
-        if(objects != null)
-            snakeSpeed += objects.get(0).getSpeed();
 
         objects = new ArrayList<GameObject>();
 
         //Snake object always starts from center of left-hand wall, moving right
-        objects.add(new GameObject(1, snakeSpeed, 0, halfPoint));
+        objects.add(new GameObject(1, 1, 0, halfPoint));
 
         //perimeter walls, 4 less due to corner overlap and 2 less due to entry/exit points
         for(int i = 0; i < GRID_SIZE; i++)
@@ -173,7 +174,27 @@ public class GameActivity extends Activity {
         mGLSurfaceView.onPause();
     }
 
-    public static void checkSnake()
+    private void startTimer()
+    {
+        TimerTask task = new TimerTask() {
+            /**
+             * The task to run should be specified in the implementation of the {@code run()}
+             * method.
+             */
+            @Override
+            public void run() {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        checkSnake();
+                    }
+                });
+            }
+        };
+        timer.schedule(task, speed);
+    }
+
+    private void checkSnake()
     {
         Iterator<GameObject> itr = objects.iterator();
         GameObject snake = itr.next();
@@ -188,6 +209,7 @@ public class GameActivity extends Activity {
                 //Increase Speed
                 //Increase Score
                 //Next Level
+            return;
         }
 
         else { //Check for Collision
@@ -203,11 +225,12 @@ public class GameActivity extends Activity {
                         //IF SCORE > HIGH SCORE
                         //STORE HIGH SCORE
                         //DISPLAY GAME OVER SCREEN
-                        break;
+                        return;
                     }
                 }
             }
         }
+        startTimer();
     }
 
     public void turnLeft(View view)
