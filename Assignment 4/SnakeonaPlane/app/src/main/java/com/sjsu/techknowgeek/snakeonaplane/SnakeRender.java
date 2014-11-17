@@ -18,6 +18,8 @@ import android.os.SystemClock;
  * renderers -- the static class GLES20 is used instead.
  */
 public class SnakeRender implements GLSurfaceView.Renderer {
+    final float GRID_UNIT = 2.0f / GameActivity.GRID_SIZE;
+
     /**
      * Store the model matrix. This matrix is used to move models
      * from object space (where each model can be thought
@@ -342,15 +344,21 @@ public class SnakeRender implements GLSurfaceView.Renderer {
         // Draw all game objects
         for(GameObject anObj : GameActivity.objects){
             Matrix.setIdentityM(mModelMatrix, 0);
+
             // Insert transformations for position
-            
+            float x = -(GRID_UNIT*GameActivity.GRID_SIZE / 2) + GRID_UNIT/2;
+            float y = -(GRID_UNIT*GameActivity.GRID_SIZE / 2);
+            x+= anObj.getX()*GRID_UNIT;
+            y+= anObj.getY()*GRID_UNIT;
 
+            Matrix.translateM(mModelMatrix, 0, x, -y, 0.0f);
+            Matrix.scaleM(mModelMatrix, 0, GRID_UNIT, GRID_UNIT, 0.0f);
 
-            if (anObj.getDirection() == 0) { // its a snake
-               // Insert transformations for position
-                drawGameObject(mSnakeVertices, 5);
-            } else {// its a wall
+            if (anObj.getDirection() == 0) {// its a wall
                 drawGameObject(mWallVertices, 4);
+            } else {// its a snake
+                // Insert rotation for head of snake
+                drawGameObject(mSnakeVertices, 5);
             }
         }
     }
