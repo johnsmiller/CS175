@@ -121,8 +121,8 @@ public class MainActivity extends Activity {
         for(int i=0; i< c.getCount(); i++)
         {
             c.moveToNext();
-            if(c.getInt(i)>currentHighScore)
-                currentHighScore = c.getInt(i);
+            if(c.getInt(0)>currentHighScore)
+                currentHighScore = c.getInt(0);
         }
         db.close();
     }
