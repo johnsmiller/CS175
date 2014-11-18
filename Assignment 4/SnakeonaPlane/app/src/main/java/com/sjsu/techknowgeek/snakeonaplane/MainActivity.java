@@ -33,6 +33,7 @@ public class MainActivity extends Activity {
         dbOpenHelper = new DBOpenHelper(this, "My_Database", 3);
         currentHighScore = 0;
         readFromDatabase();
+        updateView();
     }
 
 //begin database code
@@ -100,8 +101,8 @@ public class MainActivity extends Activity {
         {
             currentHighScore = n;
             writeToDatabase();
-            updateView();
         }
+        updateView();
     }
 
     private static void writeToDatabase()
@@ -120,10 +121,17 @@ public class MainActivity extends Activity {
         for(int i=0; i< c.getCount(); i++)
         {
             c.moveToNext();
-            if(c.getInt(0)>currentHighScore)
-                currentHighScore = c.getInt(0);
+            if(c.getInt(i)>currentHighScore)
+                currentHighScore = c.getInt(i);
         }
         db.close();
+    }
+
+    @Override
+    public void onDestroy()
+    {
+        super.onDestroy();
+        dbOpenHelper.close();
     }
 
     private static void updateView()
