@@ -83,7 +83,7 @@ public class SnakeRender implements GLSurfaceView.Renderer {
             -0.5f, 0.0f, 0.0f,
             0.5f, 0.5f, 0.5f, 1.0f,
     };
-    
+
     /**
      * Store the model matrix. This matrix is used to move models
      * from object space (where each model can be thought
@@ -352,7 +352,9 @@ public class SnakeRender implements GLSurfaceView.Renderer {
         GLES20.glClear(GLES20.GL_DEPTH_BUFFER_BIT | GLES20.GL_COLOR_BUFFER_BIT);
 
         // Draw all game objects
-        for(GameObject anObj : GameActivity.objects){
+        for(int i = 0; i < GameActivity.objects.size(); i++){
+            GameObject anObj = GameActivity.objects.get(i);
+
             Matrix.setIdentityM(mModelMatrix, 0);
 
             // Insert transformations for position
