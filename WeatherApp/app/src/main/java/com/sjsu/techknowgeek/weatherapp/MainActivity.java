@@ -1,5 +1,10 @@
 package com.sjsu.techknowgeek.weatherapp;
 
+import android.database.sqlite.*;
+import android.database.*;
+import android.content.*;
+import android.util.*;
+
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Context;
@@ -43,6 +48,10 @@ public class MainActivity extends Activity implements GooglePlayServicesClient.C
     private TextView mTemperatureTextView;
 
     public final String WEATHER_URL_HEAD = "http://www.worldweatheronline.com/v2/rss.ashx?q=";
+    private static String mZipCode;
+
+    private static SQLiteDatabase db;
+    private static DBOpenHelper dbOpenHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +67,8 @@ public class MainActivity extends Activity implements GooglePlayServicesClient.C
             bar.hide();
 
         mActivityIndicator = (ProgressBar) findViewById(R.id.address_progress);
+        //create database
+        dbOpenHelper = new DBOpenHelper(this, "My_Database", 3);
 
         //start location update
         mLocationClient = new LocationClient(this, this, this);
@@ -69,6 +80,39 @@ public class MainActivity extends Activity implements GooglePlayServicesClient.C
 
         //TODO: We need a GUI component that makes use of touch events (Refresh location button?? C/F degrees? Refresh Weather?)
     }
+
+    //begin database code
+    private static class DBOpenHelper extends SQLiteOpenHelper
+    {
+        public DBOpenHelper(Context context, String dbName, int version )
+        {
+            // third argument id to a cursor factory -- we don't care about
+            super(context, dbName, null, version);
+        }
+
+        @Override
+        public void onCreate(SQLiteDatabase db)
+        {
+            try
+            {
+                db.execSQL("CREATE TABLE IF NOT EXISTS LOCATION(LASTLOCATION CHAR(5) PRIMARY KEY)");
+            }
+            catch(SQLException e)
+            {
+                Log.e("SqliteAndroid", "DBOpenHelper", e);
+            }
+        }
+
+        @Override
+        public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion)
+        {
+            db.execSQL("DROP TABLE IF EXISTS LOCATION");
+            this.onCreate(db);
+        }
+    }
+
+
+    //end database code
 
     private void getWeather(String postalCode)
     {
@@ -151,6 +195,8 @@ public class MainActivity extends Activity implements GooglePlayServicesClient.C
             (new GetAddressTask(this)).execute(mLocation);
         }
     }
+
+
 
     private class GetAddressTask extends AsyncTask<Location, Void, String> {
         Context mContext;
@@ -241,5 +287,28 @@ public class MainActivity extends Activity implements GooglePlayServicesClient.C
         char[] buffer = new char[len];
         reader.read(buffer);
         return new String(buffer);
+    }
+
+    private static void writeToDatabase()
+    {
+        db = dbOpenHelper.getWritableDatabase();
+        db.execSQL("INSERT OR REPLACE INTO LOCATION VALUES (" + mZipCode + ")");
+        db.close();
+    }
+
+    private static void readFromDatabase()
+    {
+        db = dbOpenHelper.getReadableDatabase();
+        Cursor c = db.rawQuery("SELECT * FROM LOCATION", null); //this iterates across the db
+        
+        mZipCode = c.getString(c.getCount());
+        db.close();
+    }
+
+    @Override
+    public void onDestroy()
+    {
+        super.onDestroy();
+        dbOpenHelper.close();
     }
 }
