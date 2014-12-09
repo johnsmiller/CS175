@@ -53,6 +53,8 @@ public class MainActivity extends Activity implements GooglePlayServicesClient.C
     public final String XMLSUFFIX = "&deg;f";
 
     private static String mZipCode;
+    private static String TempinC;
+    private static String TempinF;
 
     private static SQLiteDatabase db;
     private static DBOpenHelper dbOpenHelper;
@@ -133,6 +135,9 @@ public class MainActivity extends Activity implements GooglePlayServicesClient.C
             Toast.makeText(this, "Death do us part", Toast.LENGTH_SHORT).show();
             ioe.printStackTrace();
         }
+
+        TempinC = temps[0];
+        TempinF = temps[1];
 
         // update text view with weather
         mTemperatureTextView.setText(temps[0] + "C");
@@ -277,9 +282,6 @@ public class MainActivity extends Activity implements GooglePlayServicesClient.C
 
             String cStr = contentAsString.substring(prefix + XMLPREFIX.length(), delimit);
             String fStr = contentAsString.substring(delimit + XMLDELIMIT.length(), suffix);
-
-            Toast.makeText(this, cStr + "C", Toast.LENGTH_SHORT).show();
-            Toast.makeText(this, fStr + "F", Toast.LENGTH_SHORT).show();
 
             String[] degArr = new String[2];
             degArr[0] = cStr;
