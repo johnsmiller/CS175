@@ -48,6 +48,10 @@ public class MainActivity extends Activity implements GooglePlayServicesClient.C
     private TextView mTemperatureTextView;
 
     public final String WEATHER_URL_HEAD = "http://www.worldweatheronline.com/v2/rss.ashx?q=";
+    public final String XMLPREFIX = "Temp: </b>";
+    public final String XMLDELIMIT = "&deg;c (";
+    public final String XMLSUFFIX = "&deg;f";
+
     private static String mZipCode;
 
     private static SQLiteDatabase db;
@@ -121,16 +125,17 @@ public class MainActivity extends Activity implements GooglePlayServicesClient.C
         /* Download weather from internet */
         // Get URL for xml
         String url = WEATHER_URL_HEAD + postalCode;
-
+        String[] temps = new String[2];
         // Download XML & Parse file
         try {
-            downloadUrl(url);
+            temps = downloadUrl(url);
         } catch (IOException ioe) {
             Toast.makeText(this, "Death do us part", Toast.LENGTH_SHORT).show();
             ioe.printStackTrace();
         }
 
         // update text view with weather
+        mTemperatureTextView.setText(temps[0] + "C");
     }
 
     @Override
@@ -245,11 +250,11 @@ public class MainActivity extends Activity implements GooglePlayServicesClient.C
         }
     }
 
-    private String downloadUrl(String myurl) throws IOException {
+    private String[] downloadUrl(String myurl) throws IOException {
         InputStream is = null;
         // Only display the first 500 characters of the retrieved
         // web page content.
-        int len = 500;
+        int len = 2000;
 
         try {
             URL url = new URL(myurl);
@@ -266,12 +271,21 @@ public class MainActivity extends Activity implements GooglePlayServicesClient.C
 
             // Convert the InputStream into a string
             String contentAsString = readIt(is, len);
+            int prefix = contentAsString.indexOf(XMLPREFIX);
+            int delimit = contentAsString.indexOf(XMLDELIMIT);
+            int suffix = contentAsString.indexOf(XMLSUFFIX);
 
-//            Scanner scanner = new Scanner(contentAsString);
-//            String temp = scanner.findInLine("Temp: </b>[0-9]+&deg;c ([0-9]+&deg;f)<br />");
-            Toast.makeText(this, contentAsString, Toast.LENGTH_SHORT).show();
+            String cStr = contentAsString.substring(prefix + XMLPREFIX.length(), delimit);
+            String fStr = contentAsString.substring(delimit + XMLDELIMIT.length(), suffix);
 
-            return contentAsString;
+            Toast.makeText(this, cStr + "C", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, fStr + "F", Toast.LENGTH_SHORT).show();
+
+            String[] degArr = new String[2];
+            degArr[0] = cStr;
+            degArr[1] = fStr;
+
+            return degArr;
 
             // Makes sure that the InputStream is closed after the app is
             // finished using it.
