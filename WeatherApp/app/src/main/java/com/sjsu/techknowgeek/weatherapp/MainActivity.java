@@ -9,6 +9,7 @@ import android.location.Location;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -48,6 +49,9 @@ public class MainActivity extends Activity implements GooglePlayServicesClient.C
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+
         //hide action bar
         ActionBar bar = getActionBar();
         if(bar != null)
@@ -75,7 +79,12 @@ public class MainActivity extends Activity implements GooglePlayServicesClient.C
         String url = WEATHER_URL_HEAD + postalCode;
 
         // Download XML & Parse file
-
+        try {
+            downloadUrl(url);
+        } catch (IOException ioe) {
+            Toast.makeText(this, "Death do us part", Toast.LENGTH_SHORT).show();
+            ioe.printStackTrace();
+        }
 
         // update text view with weather
     }
@@ -175,6 +184,7 @@ public class MainActivity extends Activity implements GooglePlayServicesClient.C
                     @Override
                     public void run() {
                         mCityTextView.setText(address.getLocality());
+                        getWeather(address.getPostalCode());
                     }
                 });
                 return address.getPostalCode();
@@ -186,9 +196,9 @@ public class MainActivity extends Activity implements GooglePlayServicesClient.C
         @Override
         protected void onPostExecute(String postalCode) {
             mActivityIndicator.setVisibility(View.GONE);
-            getWeather(postalCode);
         }
     }
+
     private String downloadUrl(String myurl) throws IOException {
         InputStream is = null;
         // Only display the first 500 characters of the retrieved
@@ -211,8 +221,9 @@ public class MainActivity extends Activity implements GooglePlayServicesClient.C
             // Convert the InputStream into a string
             String contentAsString = readIt(is, len);
 
-            Scanner scanner = new Scanner(contentAsString);
-            scanner.next("[CDATA[<img [>]*");
+//            Scanner scanner = new Scanner(contentAsString);
+//            String temp = scanner.findInLine("Temp: </b>[0-9]+&deg;c ([0-9]+&deg;f)<br />");
+            Toast.makeText(this, contentAsString, Toast.LENGTH_SHORT).show();
 
             return contentAsString;
 
