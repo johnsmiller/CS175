@@ -2,8 +2,6 @@ package com.sjsu.techknowgeek.weatherapp;
 
 import android.database.sqlite.*;
 import android.database.*;
-import android.content.*;
-import android.util.*;
 
 import android.app.ActionBar;
 import android.app.Activity;
@@ -31,12 +29,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
-import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.List;
 import java.util.Locale;
-import java.util.Scanner;
 
 
 public class MainActivity extends Activity implements GooglePlayServicesClient.ConnectionCallbacks, GooglePlayServicesClient.OnConnectionFailedListener{
@@ -80,15 +76,12 @@ public class MainActivity extends Activity implements GooglePlayServicesClient.C
 
         isF = true;
 
-        //start location update
-        mLocationClient = new LocationClient(this, this, this);
         mCityTextView = (TextView) findViewById(R.id.currentLocation);
         mTemperatureTextView = (TextView) findViewById(R.id.tempValue);
+        mLocationClient = new LocationClient(this, this, this);
 
         //load previous location from SQL database here
-        //TODO: Load previous location
-
-        //TODO: We need a GUI component that makes use of touch events (Refresh location button?? C/F degrees? Refresh Weather?)
+        readFromDatabase();
     }
 
     //begin database code
@@ -124,6 +117,13 @@ public class MainActivity extends Activity implements GooglePlayServicesClient.C
 
     //end database code
 
+    //Weather update code
+
+    public void startWeatherUpdate(View view)
+    {
+        mLocationClient.connect();
+    }
+
     private void getWeather(String postalCode)
     {
         Toast.makeText(this, "Postal Code: " + postalCode, Toast.LENGTH_LONG).show();
@@ -144,15 +144,17 @@ public class MainActivity extends Activity implements GooglePlayServicesClient.C
         TempinF = temps[1];
 
         // update text view with weather
-        setTemp(null);
+        setTemperature(null);
     }
 
-    public void setTemp(View view)
+    public void setTemperature(View view)
     {
         if(TempinC == null) {
             Toast.makeText(this, "Please wait for temperature to update", Toast.LENGTH_LONG).show();
             return;
         }
+        if(view != null)
+            isF = !isF;
         if(isF)
         {
             mTemperatureTextView.setText(TempinF + "F");
@@ -163,42 +165,7 @@ public class MainActivity extends Activity implements GooglePlayServicesClient.C
         }
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        // Connect the client.
-        mLocationClient.connect();
-    }
-
-    @Override
-    protected void onStop() {
-        // Disconnecting the client invalidates it.
-        mLocationClient.disconnect();
-        super.onStop();
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
+    //Methods required by GooglePlayServicesClient.ConnectionCallbacks, GooglePlayServicesClient.OnConnectionFailedListener interfaces
     @Override
     public void onConnected(Bundle bundle) {
         Toast.makeText(this, "Location Connected. Updating Weather Info.", Toast.LENGTH_SHORT).show();
@@ -226,8 +193,7 @@ public class MainActivity extends Activity implements GooglePlayServicesClient.C
         }
     }
 
-
-
+    //Location and weather background task
     private class GetAddressTask extends AsyncTask<Location, Void, String> {
         Context mContext;
         public GetAddressTask(Context context) {
@@ -277,20 +243,18 @@ public class MainActivity extends Activity implements GooglePlayServicesClient.C
 
     private String[] downloadUrl(String myurl) throws IOException {
         InputStream is = null;
-        // Only display the first 500 characters of the retrieved
-        // web page content.
+
         int len = 2000;
 
         try {
             URL url = new URL(myurl);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            conn.setReadTimeout(10000 /* milliseconds */);
-            conn.setConnectTimeout(15000 /* milliseconds */);
+            conn.setReadTimeout(10000);
+            conn.setConnectTimeout(15000);
             conn.setRequestMethod("GET");
             conn.setDoInput(true);
             // Starts the query
             conn.connect();
-            int response = conn.getResponseCode();
 
             is = conn.getInputStream();
 
@@ -308,9 +272,6 @@ public class MainActivity extends Activity implements GooglePlayServicesClient.C
             degArr[1] = fStr;
 
             return degArr;
-
-            // Makes sure that the InputStream is closed after the app is
-            // finished using it.
         } finally {
             if (is != null) {
                 is.close();
@@ -336,15 +297,53 @@ public class MainActivity extends Activity implements GooglePlayServicesClient.C
     {
         db = dbOpenHelper.getReadableDatabase();
         Cursor c = db.rawQuery("SELECT * FROM LOCATION", null); //this iterates across the db
-        
-        mZipCode = c.getString(c.getCount());
+
+        if(c.getCount()>0)
+            mZipCode = c.getString(c.getCount());
         db.close();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        // Connect the client.
+        startWeatherUpdate(null);
+    }
+
+    @Override
+    protected void onStop() {
+        // Disconnecting the client invalidates it.
+        mLocationClient.disconnect();
+        super.onStop();
     }
 
     @Override
     public void onDestroy()
     {
         super.onDestroy();
+        writeToDatabase();
         dbOpenHelper.close();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings) {
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }
