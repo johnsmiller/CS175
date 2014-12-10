@@ -56,6 +56,8 @@ public class MainActivity extends Activity implements GooglePlayServicesClient.C
     private static String TempinC;
     private static String TempinF;
 
+    private static boolean isF;
+
     private static SQLiteDatabase db;
     private static DBOpenHelper dbOpenHelper;
 
@@ -75,6 +77,8 @@ public class MainActivity extends Activity implements GooglePlayServicesClient.C
         mActivityIndicator = (ProgressBar) findViewById(R.id.address_progress);
         //create database
         dbOpenHelper = new DBOpenHelper(this, "My_Database", 3);
+
+        isF = true;
 
         //start location update
         mLocationClient = new LocationClient(this, this, this);
@@ -140,7 +144,23 @@ public class MainActivity extends Activity implements GooglePlayServicesClient.C
         TempinF = temps[1];
 
         // update text view with weather
-        mTemperatureTextView.setText(temps[0] + "C");
+        setTemp(null);
+    }
+
+    public void setTemp(View view)
+    {
+        if(TempinC == null) {
+            Toast.makeText(this, "Please wait for temperature to update", Toast.LENGTH_LONG).show();
+            return;
+        }
+        if(isF)
+        {
+            mTemperatureTextView.setText(TempinF + "F");
+        }
+        else
+        {
+            mTemperatureTextView.setText(TempinC + "C");
+        }
     }
 
     @Override
