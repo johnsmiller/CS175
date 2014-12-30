@@ -6,6 +6,7 @@ import android.database.*;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Context;
+import android.gesture.GestureOverlayView;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -16,6 +17,7 @@ import android.os.StrictMode;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -35,13 +37,14 @@ import java.util.List;
 import java.util.Locale;
 
 
-public class MainActivity extends Activity implements GooglePlayServicesClient.ConnectionCallbacks, GooglePlayServicesClient.OnConnectionFailedListener{
+public class MainActivity extends Activity implements GooglePlayServicesClient.ConnectionCallbacks, GooglePlayServicesClient.OnConnectionFailedListener, View.OnTouchListener{
 
     private LocationClient mLocationClient;
     private ProgressBar mActivityIndicator;
 
-    private TextView mCityTextView;
-    private TextView mTemperatureTextView;
+    protected static TextView mCityTextView;
+    private static TextView mTemperatureTextView;
+    private static GestureOverlayView mGestureView;
 
     public final String WEATHER_URL_HEAD = "http://www.worldweatheronline.com/v2/rss.ashx?q=";
     public final String XMLPREFIX = "Temp: </b>";
@@ -78,11 +81,24 @@ public class MainActivity extends Activity implements GooglePlayServicesClient.C
 
         mCityTextView = (TextView) findViewById(R.id.currentLocation);
         mTemperatureTextView = (TextView) findViewById(R.id.tempValue);
+        mGestureView = (GestureOverlayView) findViewById(R.id.gestureOverlayView);
         mLocationClient = new LocationClient(this, this, this);
+
+        mGestureView.setOnTouchListener(this);
 
         //load previous location from SQL database here
         readFromDatabase();
     }
+
+    @Override
+    public boolean onTouch(View v, MotionEvent event) {
+        if(event != null && event.getAction() == MotionEvent.ACTION_UP) {
+            isF = !isF;
+            setTemperature(null);
+        }
+        return true;
+    }
+
 
     //begin database code
     private static class DBOpenHelper extends SQLiteOpenHelper
@@ -297,9 +313,15 @@ public class MainActivity extends Activity implements GooglePlayServicesClient.C
     {
         db = dbOpenHelper.getReadableDatabase();
         Cursor c = db.rawQuery("SELECT * FROM LOCATION", null); //this iterates across the db
+        try {
+            if (c.getCount() > 0) {
+                mZipCode = c.getString(c.getCount());
+                mCityTextView.setText(mZipCode);
+            }
+        } catch (Exception ex)
+        {
 
-        if(c.getCount()>0)
-            mZipCode = c.getString(c.getCount());
+        }
         db.close();
     }
 
